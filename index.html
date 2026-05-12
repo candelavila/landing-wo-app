@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WhatsOrder – La app de tu negocio gastronómico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #060608;
+    --white: #f5f5f5;
+    --violet: #7c3aed;
+    --violet-light: #a855f7;
+    --violet-dim: rgba(124,58,237,0.18);
+    --grey-1: #1a1a1f;
+    --grey-2: #2a2a30;
+    --grey-3: #444450;
+    --grey-4: #888896;
+    --grey-5: #b0b0bc;
+    --border: rgba(255,255,255,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; line-height: 1.15; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ───── HEADER ───── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+    background: #ffffff;
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(0,0,0,0.10);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo img {
+    height: 46px; width: auto;
+  }
+  .logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800; font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: #111111;
+  }
+  nav { display: flex; align-items: center; gap: 2rem; }
+  nav a {
+    font-size: 0.875rem; color: #555555;
+    transition: color .2s;
+  }
+  nav a:hover { color: #111111; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: 0.875rem; letter-spacing: 0.02em;
+    cursor: pointer; transition: all .22s; border: none;
+  }
+  .btn-primary {
+    background: var(--violet); color: #fff;
+  }
+  .btn-primary:hover { background: var(--violet-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1.5px solid var(--grey-3);
+  }
+  .btn-outline:hover { border-color: var(--violet-light); color: var(--violet-light); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: #111111; border-radius: 2px; transition: all .3s; }
+
+  /* ───── HERO ───── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 120px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(124,58,237,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(124,58,237,0.10) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--violet-dim); border: 1px solid rgba(124,58,237,0.35);
+    padding: 5px 14px; border-radius: 100px; font-size: 0.78rem;
+    color: var(--violet-light); font-weight: 500; margin-bottom: 1.4rem;
+    width: fit-content;
+  }
+  .hero-badge svg { width: 14px; height: 14px; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 800; margin-bottom: 1.2rem;
+    line-height: 1.1;
+  }
+  .hero h1 span { color: var(--violet-light); }
+  .hero p {
+    font-size: 1.05rem; color: var(--grey-5);
+    max-width: 480px; margin-bottom: 2rem; line-height: 1.7;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-img-wrap {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-mockup {
+    width: 100%; border-radius: 18px;
+    object-fit: cover;
+    display: block;
+  }
+  /* Fake app screenshot placeholder */
+  .mock-screen {
+    background: #12121a; border-radius: 18px;
+    overflow: hidden; padding: 0;
+  }
+  .mock-bar {
+    background: var(--violet); padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .mock-bar-icon { font-size: 1.2rem; }
+  .mock-bar-title { font-family: 'Poppins', sans-serif; font-weight: 700; color: #fff; font-size: 0.9rem; }
+  .mock-body { padding: 16px; }
+  .mock-cat { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .mock-cat span {
+    padding: 5px 12px; border-radius: 20px; font-size: 0.72rem;
+    background: var(--violet-dim); color: var(--violet-light);
+    border: 1px solid rgba(124,58,237,0.3); cursor: pointer;
+  }
+  .mock-cat span.active { background: var(--violet); color: #fff; border-color: var(--violet); }
+  .mock-items { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mock-item {
+    background: var(--grey-2); border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mock-item-img {
+    height: 70px; background: var(--grey-3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+  }
+  .mock-item-info { padding: 8px; }
+  .mock-item-name { font-size: 0.72rem; font-weight: 600; font-family: 'Poppins', sans-serif; }
+  .mock-item-price { font-size: 0.68rem; color: var(--violet-light); margin-top: 2px; }
+  .mock-add { margin-top: 6px; background: var(--violet); color: #fff; border: none; border-radius: 6px; padding: 4px 10px; font-size: 0.65rem; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; width: 100%; }
+  .hero-stats {
+    display: flex; gap: 24px; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .hero-stat { }
+  .hero-stat-num { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--violet-light); }
+  .hero-stat-label { font-size: 0.75rem; color: var(--grey-4); margin-top: 2px; }
+
+  /* ───── SECTION BASE ───── */
+  section { padding: 96px 5vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    display: inline-block; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--violet-light); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    font-weight: 800; margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--grey-5); max-width: 560px; line-height: 1.7; }
+
+  /* ───── FEATURE SPLIT (como setmore post-hero) ───── */
+  .feat-split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 5rem;
+  }
+  .feat-split.reverse { direction: rtl; }
+  .feat-split.reverse > * { direction: ltr; }
+  .feat-list { list-style: none; margin-top: 1.8rem; display: flex; flex-direction: column; gap: 14px; }
+  .feat-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.95rem; color: var(--grey-5);
+  }
+  .feat-list li .icon {
+    flex-shrink: 0; width: 28px; height: 28px;
+    background: var(--violet-dim); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; margin-top: 1px;
+  }
+  .feat-visual {
+    background: var(--grey-1);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .feat-visual::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
+  }
+
+  /* Admin panel mockup */
+  .admin-panel {
+    background: #0e0e16; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .admin-topbar {
+    background: var(--grey-1); padding: 10px 16px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .admin-dots { display: flex; gap: 5px; }
+  .admin-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--grey-3); }
+  .admin-dots span:nth-child(1) { background: #ff5f57; }
+  .admin-dots span:nth-child(2) { background: #ffbd2e; }
+  .admin-dots span:nth-child(3) { background: #28c840; }
+  .admin-title { font-size: 0.75rem; color: var(--grey-4); font-family: 'Poppins', sans-serif; }
+  .admin-body { padding: 16px; }
+  .admin-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+  .admin-card {
+    background: var(--grey-2); border-radius: 10px; padding: 12px;
+    border: 1px solid var(--border);
+  }
+  .admin-card-label { font-size: 0.65rem; color: var(--grey-4); margin-bottom: 4px; }
+  .admin-card-val { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+  .admin-card-sub { font-size: 0.62rem; color: var(--violet-light); margin-top: 2px; }
+  .admin-table { width: 100%; border-collapse: collapse; }
+  .admin-table th { font-size: 0.62rem; color: var(--grey-4); text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--border); }
+  .admin-table td { font-size: 0.68rem; color: var(--grey-5); padding: 6px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .badge-status {
+    display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 0.6rem; font-weight: 600;
+  }
+  .badge-ok { background: rgba(40,200,64,0.15); color: #28c840; }
+  .badge-pend { background: rgba(255,189,46,0.15); color: #ffbd2e; }
+
+  /* ───── INDUSTRIES / CAROUSEL ───── */
+  .industries-section {
+    background: var(--grey-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .carousel-wrapper {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 2.5rem;
+    position: relative;
+  }
+  .carousel-viewport {
+    overflow: hidden; flex: 1;
+  }
+  .carousel-track {
+    display: flex; gap: 16px;
+    transition: transform .4s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+  }
+  .carousel-card {
+    flex: 0 0 calc(33.333% - 11px);
+    border-radius: 16px; overflow: hidden;
+    position: relative; cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform .22s, box-shadow .22s;
+  }
+  .carousel-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(124,58,237,0.25); }
+  .carousel-card img {
+    width: 100%; height: 200px; object-fit: cover; display: block;
+    transition: transform .4s;
+  }
+  .carousel-card:hover img { transform: scale(1.04); }
+  .carousel-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 0.9rem; padding: 20px 14px 12px;
+  }
+  .carousel-btn {
+    flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
+    background: var(--grey-2); border: 1px solid var(--border);
+    color: var(--white); font-size: 1.5rem; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all .2s; z-index: 2;
+  }
+  .carousel-btn:hover { background: var(--violet); border-color: var(--violet); }
+  .carousel-dots {
+    display: flex; justify-content: center; gap: 8px; margin-top: 1.2rem;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--grey-3); cursor: pointer; transition: background .2s, transform .2s;
+  }
+  .carousel-dot.active { background: var(--violet); transform: scale(1.3); }
+
+  /* ───── LIGHTBOX ───── */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 85vh; border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    cursor: default;
+    animation: fadeUp .25s ease;
+  }
+  .lightbox-close {
+    position: absolute; top: 20px; right: 24px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; width: 40px; height: 40px; border-radius: 50%;
+    font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+  /* ───── DEVICE FRAME (beneficios, feat-2) ───── */
+  .device-frame {
+    width: 100%;
+    border-radius: 22px;
+    /* Fondo radial suave que desaparece hacia los bordes */
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
+    border: none; /* Sin bordes rígidos para mejorar el fundido */
+    box-shadow: 
+      0 0 100px rgba(124, 58, 237, 0.12), /* Resplandor exterior difuminado */
+      inset 0 0 40px rgba(124, 58, 237, 0.05); /* Luz interior sutil */
+    padding: 24px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Quitamos la línea dura superior para mantener el diseño limpio */
+  .device-frame::before {
+    display: none;
+  }
+
+  /* ───── HERO DEVICE FRAME (seamless, no border) ───── */
+  .hero-device-frame {
+    width: 100%;
+    border-radius: 22px;
+    /* Fondo radial suave que desaparece hacia los bordes */
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
+    border: none;
+    /* Resplandor exterior difuminado y luz interior sutil */
+    box-shadow: 
+      0 0 100px rgba(124, 58, 237, 0.12),
+      inset 0 0 40px rgba(124, 58, 237, 0.05);
+    padding: 20px 20px 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Hero slide */
+  .hero-slide-viewport {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .hero-slide-track {
+    display: flex;
+    transition: transform .7s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+  }
+  .hero-slide-img {
+    min-width: 100%; width: 100%;
+    height: auto; display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .phone-qr-combo {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 420px;
+  }
+  .combo-phone {
+    width: 68%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5));
+  }
+  .combo-qr {
+    width: 38%;
+    max-width: 170px;
+    height: auto;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 2%;
+    z-index: 3;
+    border-radius: 14px;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    transform: rotate(3deg);
+  }
+
+  /* ───── HOW IT WORKS ───── */
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+  .step { position: relative; }
+  .step-num {
+    font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 800;
+    color: var(--violet-dim); line-height: 1; margin-bottom: 0.8rem;
+    -webkit-text-stroke: 1px rgba(124,58,237,0.4);
+    color: transparent;
+  }
+  .step-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.9rem; color: var(--grey-5); line-height: 1.6; }
+  .step-connector {
+    display: none;
+  }
+
+  /* ───── PRICING ───── */
+  .pricing-section { background: var(--grey-1); }
+  .pricing-top { text-align: center; margin-bottom: 3rem; }
+  .pricing-top .section-sub { margin: 0 auto; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .plan-card {
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px 28px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    transition: transform .22s, border-color .22s;
+  }
+  .plan-card:hover { transform: translateY(-4px); }
+  .plan-card.featured {
+    border-color: var(--violet);
+    background: linear-gradient(160deg, rgba(124,58,237,0.12), var(--black) 60%);
+  }
+  .plan-featured-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--violet); color: #fff;
+    font-size: 0.68rem; font-weight: 700; font-family: 'Poppins', sans-serif;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em;
+  }
+  .plan-name { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1rem; color: var(--grey-5); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .plan-price { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.2rem; line-height: 1; margin-bottom: 0.4rem; }
+  .plan-price span { font-size: 1rem; font-weight: 400; color: var(--grey-5); }
+  .plan-desc { font-size: 0.85rem; color: var(--grey-4); margin-bottom: 1.6rem; line-height: 1.5; }
+  .plan-divider { height: 1px; background: var(--border); margin-bottom: 1.4rem; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .plan-features li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.875rem; color: var(--grey-5); line-height: 1.45;
+  }
+  .plan-features li .chk {
+    flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--violet-dim); display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .plan-features li .chk svg { width: 10px; height: 10px; stroke: var(--violet-light); stroke-width: 2.5; fill: none; }
+  .plan-cta { margin-top: 1.8rem; }
+  .plan-cta .btn { width: 100%; justify-content: center; padding: 13px; font-size: 0.9rem; }
+  .pricing-note { text-align: center; margin-top: 1.8rem; font-size: 0.82rem; color: var(--grey-4); }
+  .pricing-note a { color: var(--violet-light); text-decoration: underline; }
+
+  /* ───── INSTALLATION ───── */
+  .install-box {
+    background: var(--grey-1);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+    position: relative; overflow: hidden;
+  }
+  .install-box::before {
+    content: ''; position: absolute; right: -80px; top: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%);
+  }
+  .install-text h2 { font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; margin-bottom: 0.8rem; }
+  .install-text p { font-size: 0.95rem; color: var(--grey-5); max-width: 480px; }
+  .install-price {
+    background: var(--black); border: 1px solid var(--violet);
+    border-radius: 16px; padding: 28px 36px; text-align: center;
+    flex-shrink: 0;
+  }
+  .install-price .label { font-size: 0.75rem; color: var(--grey-4); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .install-price .amount { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.4rem; color: var(--violet-light); }
+  .install-price .sublabel { font-size: 0.75rem; color: var(--grey-5); margin-top: 4px; }
+
+  /* ───── FAQ ───── */
+  .faq-section { background: var(--grey-1); }
+  .faq-top { text-align: center; margin-bottom: 3rem; }
+  .faq-top .section-sub { margin: 0 auto; }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 900px; margin: 0 auto; }
+  .faq-item {
+    background: var(--black); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; cursor: pointer;
+    font-weight: 600; font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    gap: 12px;
+    transition: color .2s;
+  }
+  .faq-q:hover { color: var(--violet-light); }
+  .faq-q .arrow {
+    flex-shrink: 0; width: 22px; height: 22px;
+    border: 1.5px solid var(--grey-3); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .25s;
+  }
+  .faq-q .arrow svg { width: 10px; height: 10px; stroke: var(--grey-4); stroke-width: 2; fill: none; transition: transform .25s; }
+  .faq-item.open .faq-q .arrow { border-color: var(--violet); background: var(--violet-dim); }
+  .faq-item.open .faq-q .arrow svg { stroke: var(--violet-light); transform: rotate(180deg); }
+  .faq-a {
+    display: none; padding: 0 22px 18px;
+    font-size: 0.875rem; color: var(--grey-5); line-height: 1.65;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: #ffffff;
+    border-top: 1px solid rgba(0,0,0,0.10);
+    padding: 60px 5vw 36px;
+    color: #111111;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .logo-text { font-size: 1.1rem; margin-top: 6px; color: #111111; }
+  .footer-brand p { font-size: 0.875rem; color: #666666; margin-top: 10px; line-height: 1.6; max-width: 280px; }
+  .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a { font-size: 0.875rem; color: #444444; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--violet); }
+  .footer-bottom {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 24px; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: #888888; }
+  .footer-social { display: flex; gap: 12px; }
+  .footer-social a {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: #f0f0f0; border: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; transition: all .2s;
+  }
+  .footer-social a:hover { border-color: var(--violet); background: var(--violet-dim); }
+
+  /* ───── FLOATING WA ───── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25d366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+    transition: transform .2s, box-shadow .2s;
+    cursor: pointer;
+  }
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(37,211,102,0.55); }
+  .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-img-wrap { max-width: 540px; margin: 0 auto; }
+    .feat-split { grid-template-columns: 1fr; }
+    .feat-split.reverse { direction: ltr; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .carousel-card { flex: 0 0 calc(50% - 8px); }
+  }
+  @media (max-width: 768px) {
+    nav { display: none; }
+    nav.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.10); padding: 20px 5vw; gap: 1.2rem; z-index: 99; }
+    .hamburger { display: flex; }
+    .steps { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .install-box { padding: 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .carousel-card { flex: 0 0 calc(100% - 0px); }
+    .hero-stats { gap: 16px; }
+    .admin-cards { grid-template-columns: 1fr 1fr; }
+    .phone-qr-combo { min-height: 300px; }
+    .combo-phone { width: 65%; }
+    .combo-qr { width: 40%; }
+  }
+  @media (max-width: 480px) {
+    .industries-grid { grid-template-columns: repeat(2,1fr); }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
+  }
+
+  /* ───── ANIMATIONS ───── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .anim-fadeup { animation: fadeUp .7s ease both; }
+  .delay-1 { animation-delay: .1s; }
+  .delay-2 { animation-delay: .2s; }
+  .delay-3 { animation-delay: .3s; }
+  .delay-4 { animation-delay: .4s; }
+
+  /* Noise texture overlay */
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: .4;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <img src="icono.png" alt="WhatsOrder logo" />
+    <span class="logo-text">WHATS ORDER.</span>
+  </a>
+  <nav id="main-nav">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#planes">Planes</a>
+    <a href="#faq">Consultas</a>
+    <a href="#contacto" class="btn btn-primary">Empezá hoy</a>
+  </nav>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge anim-fadeup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Sistema de pedidos online para gastronomía
+      </div>
+      <h1 class="anim-fadeup delay-1">Tu negocio gastronómico, <span>digitalizado y organizado</span></h1>
+      <p class="anim-fadeup delay-2">Creamos la app personalizada para tu restaurante, heladería, sushi, rotisería o cualquier negocio de comida. Tus clientes piden fácil, vos gestionás todo desde un panel simple.</p>
+      <div class="hero-ctas anim-fadeup delay-3">
+        <a href="#contacto" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          Quiero mi app
+        </a>
+        <a href="#como-funciona" class="btn btn-outline">Ver demo</a>
+      </div>
+      <div class="hero-stats anim-fadeup delay-4">
+        <div class="hero-stat">
+          <div class="hero-stat-num">0%</div>
+          <div class="hero-stat-label">Comisión por pedido</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">24hs</div>
+          <div class="hero-stat-label">Para estar online</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Personalizada</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-img-wrap anim-fadeup delay-2">
+      <div class="hero-device-frame">
+        <div class="hero-slide-viewport">
+          <div class="hero-slide-track" id="heroSlideTrack">
+            <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" class="hero-slide-img" />
+            <img src="notebook-phone-sin-fondo.png" alt="WhatsOrder en notebook y celular" class="hero-slide-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries-section" id="rubros">
+  <div class="section-inner">
+    <span class="section-label">Para todo el rubro gastronómico</span>
+    <h2 class="section-title">Funciona para cualquier negocio de comida</h2>
+    <p class="section-sub">No importa si vendés sushi, pizza, helados o empanadas. WhatsOrder se adapta a tu carta, tus colores y tu forma de trabajar.</p>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn carousel-prev" onclick="carouselPrev()" aria-label="Anterior">&#8249;</button>
+      <div class="carousel-viewport" id="carouselViewport">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Cards -->
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=900')">
+            <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=500&q=80" alt="Heladería" loading="lazy" />
+            <div class="carousel-label">Heladería</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900')">
+            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=500&q=80" alt="Sushi" loading="lazy" />
+            <div class="carousel-label">Sushi</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900')">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Pizzería" loading="lazy" />
+            <div class="carousel-label">Pizzería</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900')">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" alt="Parrilla" loading="lazy" />
+            <div class="carousel-label">Parrilla</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900')">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80" alt="Hamburguesería" loading="lazy" />
+            <div class="carousel-label">Hamburguesería</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900')">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80" alt="Panadería" loading="lazy" />
+            <div class="carousel-label">Panadería</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=900')">
+            <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=500&q=80" alt="Rotisería" loading="lazy" />
+            <div class="carousel-label">Rotisería</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?w=900')">
+            <img src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?w=500&q=80" alt="Comida rápida" loading="lazy" />
+            <div class="carousel-label">Comida rápida</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-next" onclick="carouselNext()" aria-label="Siguiente">&#8250;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+</section>
+
+<!-- FEAT 1: Para el cliente -->
+<section id="beneficios">
+  <div class="section-inner">
+    <div class="feat-split">
+      <div class="feat-content">
+        <span class="section-label">Para tus clientes</span>
+        <h2 class="section-title">Pedir en segundos, sin llamadas ni confusiones</h2>
+        <p class="section-sub">El cliente ve tu carta con fotos, precios y combos, elige lo que quiere y con un toque el pedido llega directo a tu WhatsApp. Todo claro, todo detallado.</p>
+        <ul class="feat-list">
+          <li><span class="icon">📸</span><span>Carta digital con fotos, descripción y precios actualizados en tiempo real.</span></li>
+          <li><span class="icon">🛒</span><span>Carrito de compras simple: el cliente arma su pedido a su ritmo.</span></li>
+          <li><span class="icon">💬</span><span>Con un solo clic el pedido llega completo a tu WhatsApp con todos los detalles.</span></li>
+          <li><span class="icon">🚚</span><span>Soporte para delivery o retiro en local, con ingreso de dirección.</span></li>
+          <li><span class="icon">💳</span><span>Múltiples métodos de pago que vos configurás desde el panel.</span></li>
+        </ul>
+      </div>
+      <div class="feat-visual" style="background:transparent;border:none;padding:0;overflow:visible;">
+        <div class="device-frame">
+          <img src="phone-qr2.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEAT 2: Panel admin -->
+<section style="background:var(--grey-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="feat-split reverse">
+      <div class="feat-content">
+        <span class="section-label">Para vos, el negocio</span>
+        <h2 class="section-title">Panel de control para gestionar todo desde donde estés</h2>
+        <p class="section-sub">Administrá tu carta, controlá pedidos en tiempo real, descargá estadísticas y tomá mejores decisiones con datos reales.</p>
+        <ul class="feat-list">
+          <li><span class="icon">📦</span><span>Agregá, editá o desactivá productos, precios, fotos y categorías en segundos.</span></li>
+          <li><span class="icon">📊</span><span>Estadísticas de ventas diarias, semanales y mensuales. Ticket promedio y productos más vendidos.</span></li>
+          <li><span class="icon">📥</span><span>Exportá tu historial de pedidos en Excel para llevar un control real de tu negocio.</span></li>
+          <li><span class="icon">🏪</span><span>Soporte para múltiples sucursales, cada una con su panel y WhatsApp propio.</span></li>
+          <li><span class="icon">🔔</span><span>Notificaciones instantáneas de pedidos por WhatsApp o email al encargado.</span></li>
+        </ul>
+      </div>
+      <div class="feat-visual" style="background:transparent;border:none;padding:0;overflow:visible;">
+        <div class="device-frame">
+          <img src="notebook-panel.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;" />
+        </div>
+        <!--<div class="device-frame">
+          <div class="admin-panel">
+          <div class="admin-topbar">
+            <div class="admin-dots"><span></span><span></span><span></span></div>
+            <div class="admin-title">Panel de Administración – WhatsOrder</div>
+          </div>
+          <div class="admin-body">
+            <div class="admin-cards">
+              <div class="admin-card">
+                <div class="admin-card-label">Ventas hoy</div>
+                <div class="admin-card-val">$42.600</div>
+                <div class="admin-card-sub">↑ 18% vs ayer</div>
+              </div>
+              <div class="admin-card">
+                <div class="admin-card-label">Pedidos</div>
+                <div class="admin-card-val">23</div>
+                <div class="admin-card-sub">↑ 5 más</div>
+              </div>
+              <div class="admin-card">
+                <div class="admin-card-label">Ticket prom.</div>
+                <div class="admin-card-val">$1.852</div>
+                <div class="admin-card-sub">↑ 7%</div>
+              </div>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Cliente</th>
+                  <th>Producto</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>024</td>
+                  <td>Ana M.</td>
+                  <td>Combo x8 + postre</td>
+                  <td>$6.000</td>
+                  <td><span class="badge-status badge-ok">Listo</span></td>
+                </tr>
+                <tr>
+                  <td>023</td>
+                  <td>Luis R.</td>
+                  <td>Pizza Napolitana</td>
+                  <td>$3.200</td>
+                  <td><span class="badge-status badge-pend">En camino</span></td>
+                </tr>
+                <tr>
+                  <td>022</td>
+                  <td>María S.</td>
+                  <td>1/2 kg Helado x4</td>
+                  <td>$1.800</td>
+                  <td><span class="badge-status badge-ok">Listo</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>-->
+        </div><!-- end admin-panel -->
+        </div><!-- end device-frame -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:1rem;">
+      <span class="section-label">Proceso simple</span>
+    </div>
+    <h2 class="section-title" style="text-align:center;">Estar online en 3 pasos</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 3rem;">Sin tecnicismos ni complicaciones. Te armamos todo, vos solo te enfocás en vender.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">🤝</div>
+        <h3>Nos contactás</h3>
+        <p>Hablamos por WhatsApp, entendemos tu negocio y te explicamos cómo funciona la plataforma sin compromiso.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🎨</div>
+        <h3>Personalizamos tu app</h3>
+        <p>Cargamos tu carta completa, tus precios, fotos y los colores de tu marca. Tu app queda lista en 24 horas.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">🚀</div>
+        <h3>Salís online y vendés más</h3>
+        <p>Compartís el link o QR con tus clientes y empezás a recibir pedidos organizados directo a tu WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALLATION COST -->
+<section style="padding-top:0;padding-bottom:96px;">
+  <div class="section-inner">
+    <div class="install-box">
+      <div class="install-text">
+        <h2>Costo único de instalación y personalización</h2>
+        <p>Incluye todo lo necesario para dejar tu app lista: carga completa de la carta con fotos y precios, configuración de métodos de pago, personalización con los colores y tipografía de tu marca, y QR personalizado para tu local.</p>
+      </div>
+      <div class="install-price">
+        <div class="label">Pago único</div>
+        <div class="amount">$200.000</div>
+        <div class="sublabel">y listo en 24hs</div>
+        <a href="#contacto" class="btn btn-primary" style="margin-top:14px;width:100%;justify-content:center;">Quiero empezar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="planes">
+  <div class="section-inner">
+    <div class="pricing-top">
+      <span class="section-label">Planes mensuales</span>
+      <h2 class="section-title">Elegí el plan que mejor se adapta a tu negocio</h2>
+      <p class="section-sub">Sin comisiones por pedido. Sin sorpresas. Cancelás cuando quieras.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- PLAN BÁSICO -->
+      <div class="plan-card">
+        <div class="plan-name">Plan Básico</div>
+        <div class="plan-price">$30.000<span>/mes</span></div>
+        <div class="plan-desc">Para negocios que solo necesitan que el sistema siga funcionando perfectamente.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Soporte técnico en horario comercial (respuesta en 24–48hs)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Corrección de errores básicos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Backup semanal de pedidos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> 1 actualización de carta por mes (precios o productos)</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="#contacto" class="btn btn-outline">Elegir Básico</a>
+        </div>
+      </div>
+
+      <!-- PLAN PREMIUM -->
+      <div class="plan-card">
+        <div class="plan-name">Plan Premium</div>
+        <div class="plan-price">$60.000<span>/mes</span></div>
+        <div class="plan-desc">Para negocios que buscan estadísticas y soporte más activo para crecer.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Todo lo del Plan Básico incluido</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Soporte prioritario (respuesta en menos de 12hs hábiles)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Estadísticas: ventas diarias, semanales y mensuales, ticket promedio, productos más vendidos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Reporte mensual en PDF/Excel enviado al dueño</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Cambios ilimitados de carta (precios, productos, fotos)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Backup diario automático</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="#contacto" class="btn btn-outline">Elegir Premium</a>
+        </div>
+      </div>
+
+      <!-- PLAN FULL -->
+      <div class="plan-card featured">
+        <div class="plan-featured-badge">✅ Recomendado</div>
+        <div class="plan-name">Plan Full</div>
+        <div class="plan-price">$100.000<span>/mes</span></div>
+        <div class="plan-desc">La opción ideal para negocios que quieren crecer y delegar todo lo digital.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Todo lo del Plan Premium incluido</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Soporte ultra-prioritario (respuesta en menos de 4hs hábiles)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Estadísticas avanzadas con comparativas mes a mes y gráficos interactivos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Gestión de múltiples sucursales con panel y WhatsApp propio por cada una</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Notificaciones instantáneas de pedidos por WhatsApp o email</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Asesoría en marketing: promociones programadas, plantillas WhatsApp</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> 2 piezas gráficas mensuales (flyers para redes o WhatsApp)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Reunión mensual para analizar ventas y planificar mejoras</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="#contacto" class="btn btn-primary">Elegir Full</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="pricing-note">Todos los planes se abonan mensualmente. Sin permanencia mínima. ¿Dudas? <a href="#faq">Mirá las preguntas frecuentes</a> o <a href="#contacto">escribinos</a>.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="faq-top">
+      <span class="section-label">Consultas frecuentes</span>
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-sub">Todo lo que necesitás saber antes de empezar.</p>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Sirve para cualquier tipo de negocio gastronómico?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Sí. WhatsOrder funciona para heladería, sushi, pizzería, rotisería, parrilla, hamburguesería, panadería y cualquier negocio que venda comida y reciba pedidos por WhatsApp. Adaptamos la carta y el sistema a tu rubro.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuánto tiempo tarda en estar lista mi app?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Una vez que nos enviás tu carta, precios, fotos y colores de marca, dejamos todo listo en 24 horas. Solo tenés que compartir el link o QR con tus clientes y ya estás online.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Cobran comisión por cada pedido?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">No. Cero comisión por pedido. Solo pagás el costo de instalación una vez y luego el plan mensual que elijas. Cuanto más vendés, más te conviene.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo cambiar mi carta o precios cuando quiero?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Con el Plan Básico tenés 1 cambio por mes. Con Premium y Full los cambios son ilimitados. En todos los casos respondemos rápido para que tu carta siempre esté actualizada.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Necesito tener conocimientos técnicos para usar el panel?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Para nada. El panel está diseñado para ser simple e intuitivo. Si sabés usar WhatsApp, podés usar el panel. Y si surge alguna duda, te acompañamos con soporte directo.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Puedo cancelar el plan en cualquier momento?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Sí. No hay permanencia mínima. Los planes son mensuales y podés cancelar cuando quieras sin penalidades. Trabajamos para que quieras quedarte porque el servicio es bueno, no por contratos.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa con mis datos y los pedidos si cancelo?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Todos los pedidos y datos son tuyos. Antes de cancelar podés descargar tu historial completo en Excel. Tus datos nunca se comparten con terceros.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          ¿Funciona para negocios con más de una sucursal?
+          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
+        </div>
+        <div class="faq-a">Sí, con el Plan Full gestionás múltiples sucursales desde un mismo sistema. Cada una tiene su propio panel y su propio WhatsApp de pedidos, con cartas y precios independientes.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACTO -->
+<section id="contacto" style="background:var(--black);">
+  <div class="section-inner" style="text-align:center;">
+    <span class="section-label">Empezá hoy</span>
+    <h2 class="section-title" style="margin:0 auto 1rem;">¿Listo para digitalizar tu negocio?</h2>
+    <p class="section-sub" style="margin:0 auto 2.5rem;">Escribinos por WhatsApp y en minutos te contamos todo. Sin compromisos, sin tecnicismos.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20info%20sobre%20WhatsOrder" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L.057 23.083a1 1 0 001.226 1.226l5.236-1.467A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.515-5.163-1.414l-.37-.221-3.107.87.87-3.107-.22-.371A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+      <a href="mailto:hola@whatsorder.app" class="btn btn-outline" style="font-size:1rem;padding:14px 32px;">
+        hola@whatsorder.app
+      </a>
+    </div>
+    <p style="font-size:0.8rem;color:var(--grey-4);margin-top:1.2rem;">También nos encontrás en Instagram: <a href="https://instagram.com/whatsorder.app" style="color:var(--violet-light);">@whatsorder.app</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="icono.png" alt="WhatsOrder" style="height:36px;" />
+          <span class="logo-text">WHATS ORDER.</span>
+        </div>
+        <p>Soluciones digitales para negocios gastronómicos que quieren crecer, organizarse y vender más con pedidos por WhatsApp.</p>
+        <div class="footer-social" style="margin-top:16px;">
+          <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram">📸</a>
+          <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp">💬</a>
+          <a href="mailto:hola@whatsorder.app" title="Email">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#planes">Planes y precios</a></li>
+          <li><a href="#rubros">Rubros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Términos de uso</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 WhatsOrder. Todos los derechos reservados. Hecho con ❤️ en Argentina.</p>
+      <p style="color:var(--grey-4);font-size:0.75rem;">whatsorder.app · <a href="https://instagram.com/whatsorder.app" style="color:var(--grey-4);">@whatsorder.app</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA BUTTON -->
+<a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20info%20sobre%20WhatsOrder" target="_blank" class="wa-float" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L.057 23.083a1 1 0 001.226 1.226l5.236-1.467A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.515-5.163-1.414l-.37-.221-3.107.87.87-3.107-.22-.371A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<script>
+  function toggleNav() {
+    const nav = document.getElementById('main-nav');
+    nav.classList.toggle('open');
+  }
+
+  // ── FAQ: exclusive accordion ──
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Open only if it wasn't already open
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── HERO SLIDER (auto, 3s) ──
+  const track = document.getElementById('heroSlideTrack');
+  let heroTimer;
+
+  function heroNext() {
+    if (!track) return;
+
+    // 1. Aplicamos la transición suave y desplazamos una imagen a la izquierda
+    track.style.transition = 'transform 0.7s cubic-bezier(.4,0,.2,1)';
+    track.style.transform = 'translateX(-100%)';
+
+    // 2. Esperamos el tiempo exacto que dura la transición en CSS (700ms)
+    setTimeout(() => {
+      // Apagamos la transición momentáneamente
+      track.style.transition = 'none';
+      
+      // Movemos el primer nodo hijo al final de la lista
+      track.appendChild(track.firstElementChild);
+      
+      // Reseteamos visualmente a 0. Como el nodo cambió, muestra la nueva imagen
+      track.style.transform = 'translateX(0)';
+    }, 700);
+  }
+
+  function startHeroTimer() {
+    clearInterval(heroTimer);
+    heroTimer = setInterval(heroNext, 3000);
+  }
+
+  // ── RUBROS CAROUSEL ──
+  let carouselIndex = 0;
+
+  function getCardsPerPage() {
+    return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+  }
+
+  function getTrack() { return document.getElementById('carouselTrack'); }
+  function getViewport() { return document.getElementById('carouselViewport'); }
+  function getDotsEl() { return document.getElementById('carouselDots'); }
+
+  function getCardCount() { const t = getTrack(); return t ? t.children.length : 0; }
+  function getTotalPages() { return Math.ceil(getCardCount() / getCardsPerPage()); }
+
+  function buildDots() {
+    const dotsEl = getDotsEl();
+    if (!dotsEl) return;
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < getTotalPages(); i++) {
+      const d = document.createElement('div');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => carouselGoTo(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function carouselGoTo(page) {
+    const total = getTotalPages();
+    carouselIndex = ((page % total) + total) % total;
+    const vp = getViewport();
+    const t = getTrack();
+    if (!vp || !t) return;
+    t.style.transform = `translateX(-${carouselIndex * vp.offsetWidth}px)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === carouselIndex);
+    });
+  }
+
+  function carouselPrev() { carouselGoTo(carouselIndex - 1); }
+  function carouselNext() { carouselGoTo(carouselIndex + 1); }
+
+  // ── LIGHTBOX ──
+  function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    buildDots();
+    startHeroTimer();
+  });
+  window.addEventListener('resize', () => {
+    buildDots();
+    carouselGoTo(0);
+  });
+</script>
+</body>
+</html>
