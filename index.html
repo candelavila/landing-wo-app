@@ -897,92 +897,393 @@
   </div>
 </section>
 
-<!-- FEAT 2: Panel admin 
-    style="background:var(--grey-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);" -->
-<section>
-  <div class="section-inner">
-    <div class="feat-split reverse">
-      <div class="feat-content">
-        <span class="section-label">Para vos, el negocio</span>
-        <h2 class="section-title">Panel de control para gestionar todo desde donde estés</h2>
-        <p class="section-sub">Administrá tu carta, controlá pedidos en tiempo real, descargá estadísticas y tomá mejores decisiones con datos reales.</p>
-        <ul class="feat-list">
-          <li><span class="icon">📦</span><span>Agregá, editá o desactivá productos, precios, fotos y categorías en segundos.</span></li>
-          <li><span class="icon">📊</span><span>Estadísticas de ventas diarias, semanales y mensuales. Ticket promedio y productos más vendidos.</span></li>
-          <li><span class="icon">📥</span><span>Exportá tu historial de pedidos en Excel para llevar un control real de tu negocio.</span></li>
-          <li><span class="icon">🏪</span><span>Soporte para múltiples sucursales, cada una con su panel y WhatsApp propio.</span></li>
-          <li><span class="icon">🔔</span><span>Notificaciones instantáneas de pedidos por WhatsApp o email al encargado.</span></li>
-        </ul>
-      </div>
-      <div class="feat-visual" style="background:transparent;border:none;padding:0;overflow:visible;">
-        <div class="device-frame">
-          <img src="notebook-panel.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;" />
+<!-- MUESTREO UTILIDADES: scroll-driven horizontal panorama (inspired by Rockstar VI) -->
+<style>
+  /* ── Scroll Panorama ── */
+  .scroll-panorama {
+    position: relative;
+    /* altura total del scroll = 100vh (sticky) + espacio extra para el avance horizontal */
+    height: 280vh;
+    padding: 0;
+  }
+  .scroll-panorama__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  /* Degradado izquierdo para fundir el borde */
+  .scroll-panorama__sticky::before,
+  .scroll-panorama__sticky::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .scroll-panorama__sticky::before {
+    left: 0;
+    background: linear-gradient(to right, var(--black), transparent);
+  }
+  .scroll-panorama__sticky::after {
+    right: 0;
+    background: linear-gradient(to left, var(--black), transparent);
+  }
+
+  .scroll-panorama__track {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    will-change: transform;
+    /* Empieza visible, JS lo mueve */
+    transform: translateX(0);
+    transition: transform 0.05s linear;
+  }
+
+  /* ── Cada panel dentro del track ── */
+  .sp-panel {
+    flex-shrink: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 0 5vw 0 max(5vw, 60px);
+    position: relative;
+  }
+  /* Separador vertical entre paneles */
+  .sp-panel + .sp-panel {
+    border-left: 1px solid var(--border);
+  }
+
+  /* Texto fijo a la izquierda */
+  .sp-text {
+    padding-right: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+  .sp-text .section-label { margin-bottom: 0.8rem; }
+  .sp-text h2 {
+    font-size: clamp(1.65rem, 2.4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.12;
+  }
+  .sp-text p {
+    font-size: 0.95rem;
+    color: var(--grey-5);
+    line-height: 1.7;
+    max-width: 340px;
+    margin-bottom: 1.6rem;
+  }
+  .sp-feat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sp-feat-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--grey-5);
+    line-height: 1.5;
+  }
+  .sp-feat-list li .icon {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: var(--violet-dim);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    margin-top: 1px;
+  }
+
+  /* Galería de imágenes a la derecha */
+  .sp-gallery {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+    overflow: visible;
+  }
+  .sp-img-card {
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid var(--border);
+    background: var(--grey-1);
+    transition: transform 0.28s cubic-bezier(.25,.46,.45,.94), box-shadow 0.28s;
+  }
+  .sp-img-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.28);
+    border-color: rgba(124,58,237,0.4);
+    z-index: 5;
+  }
+  .sp-img-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .sp-img-card:hover img { transform: scale(1.04); }
+
+  /* Overlay zoom icon */
+  .sp-img-card::after {
+    content: '↗';
+    position: absolute;
+    bottom: 12px; right: 14px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 32px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.22s, transform 0.22s;
+    pointer-events: none;
+  }
+  .sp-img-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Sizing variado para galería panel 1 (3 imgs) */
+  .sp-panel--a .sp-img-card:nth-child(1) { width: 200px; height: 300px; }
+  .sp-img-card:nth-child(1) img { object-position: center top; }
+  .sp-panel--a .sp-img-card:nth-child(2) { width: 330px; height: 420px; transform: translateY(20px); }
+  .sp-panel--a .sp-img-card:nth-child(3) { width: 240px; height: 340px; }
+
+  /* Sizing variado para galería panel 2 (2 imgs) */
+  .sp-panel--b .sp-img-card:nth-child(1) { width: 360px; height: 440px; }
+  .sp-panel--b .sp-img-card:nth-child(2) { width: 280px; height: 360px; transform: translateY(30px); }
+
+  /* Indicador de progreso */
+  .sp-progress {
+    position: absolute;
+    bottom: 32px;
+    left: max(5vw, 60px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+  }
+  .sp-progress-bar {
+    width: 200px; height: 2px;
+    background: var(--grey-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sp-progress-fill {
+    height: 100%;
+    background: var(--violet-light);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+  .sp-progress-label {
+    font-size: 0.7rem;
+    color: var(--grey-4);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .sp-scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    right: 5vw;
+    font-size: 0.7rem;
+    color: var(--grey-4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 1;
+    transition: opacity 0.5s;
+    z-index: 20;
+  }
+  .sp-scroll-hint svg {
+    width: 16px; height: 16px;
+    stroke: var(--grey-4);
+    animation: nudge 1.8s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  /* Mobile: stack vertical */
+  @media (max-width: 900px) {
+    .scroll-panorama { height: auto; }
+    .scroll-panorama__sticky { position: relative; height: auto; overflow: visible; flex-direction: column; }
+    .scroll-panorama__sticky::before,
+    .scroll-panorama__sticky::after { display: none; }
+    .scroll-panorama__track { flex-direction: column; transform: none !important; }
+    .sp-panel {
+      grid-template-columns: 1fr;
+      width: 100%;
+      min-height: auto;
+      padding: 64px 5vw;
+      gap: 2.5rem;
+    }
+    .sp-panel + .sp-panel { border-left: none; border-top: 1px solid var(--border); }
+    .sp-text { padding-right: 0; }
+    .sp-gallery { flex-wrap: wrap; justify-content: center; overflow: visible; padding: 0; }
+    .sp-panel--a .sp-img-card:nth-child(1),
+    .sp-panel--a .sp-img-card:nth-child(2),
+    .sp-panel--a .sp-img-card:nth-child(3),
+    .sp-panel--b .sp-img-card:nth-child(1),
+    .sp-panel--b .sp-img-card:nth-child(2) {
+      width: calc(50% - 10px);
+      height: 200px;
+      transform: none !important;
+    }
+    .sp-progress, .sp-scroll-hint { display: none; }
+  }
+</style>
+
+<section id="muestreo-utilidades" class="scroll-panorama" style="padding:0;">
+  <div class="scroll-panorama__sticky" id="spSticky">
+    <div class="scroll-panorama__track" id="spTrack">
+
+      <!-- ── PANEL A: Para vos, el negocio ── -->
+      <div class="sp-panel sp-panel--a">
+        <div class="sp-text">
+          <span class="section-label">Para vos, el negocio</span>
+          <h2>Panel de control para gestionar todo desde donde estés</h2>
+          <p>Administrá tu carta, controlá pedidos en tiempo real, descargá estadísticas y tomá mejores decisiones con datos reales.</p>
+          <ul class="sp-feat-list">
+            <li><span class="icon">📦</span><span>Agregá, editá o desactivá productos, precios, fotos y categorías en segundos.</span></li>
+            <li><span class="icon">📊</span><span>Estadísticas de ventas diarias, semanales y mensuales. Ticket promedio y más vendidos.</span></li>
+            <li><span class="icon">📥</span><span>Exportá tu historial de pedidos en Excel para llevar un control real de tu negocio.</span></li>
+            <li><span class="icon">🏪</span><span>Soporte para múltiples sucursales, cada una con su panel y WhatsApp propio.</span></li>
+            <li><span class="icon">🔔</span><span>Notificaciones instantáneas de pedidos por WhatsApp o email al encargado.</span></li>
+          </ul>
         </div>
-        <!--<div class="device-frame">
-          <div class="admin-panel">
-          <div class="admin-topbar">
-            <div class="admin-dots"><span></span><span></span><span></span></div>
-            <div class="admin-title">Panel de Administración – WhatsOrder</div>
+        <div class="sp-gallery">
+          <div class="sp-img-card" onclick="openLightbox('phone-qr2.png')">
+            <img src="phone-qr2.png" alt="WhatsOrder en celular con QR" />
           </div>
-          <div class="admin-body">
-            <div class="admin-cards">
-              <div class="admin-card">
-                <div class="admin-card-label">Ventas hoy</div>
-                <div class="admin-card-val">$42.600</div>
-                <div class="admin-card-sub">↑ 18% vs ayer</div>
-              </div>
-              <div class="admin-card">
-                <div class="admin-card-label">Pedidos</div>
-                <div class="admin-card-val">23</div>
-                <div class="admin-card-sub">↑ 5 más</div>
-              </div>
-              <div class="admin-card">
-                <div class="admin-card-label">Ticket prom.</div>
-                <div class="admin-card-val">$1.852</div>
-                <div class="admin-card-sub">↑ 7%</div>
-              </div>
-            </div>
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Cliente</th>
-                  <th>Producto</th>
-                  <th>Total</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>024</td>
-                  <td>Ana M.</td>
-                  <td>Combo x8 + postre</td>
-                  <td>$6.000</td>
-                  <td><span class="badge-status badge-ok">Listo</span></td>
-                </tr>
-                <tr>
-                  <td>023</td>
-                  <td>Luis R.</td>
-                  <td>Pizza Napolitana</td>
-                  <td>$3.200</td>
-                  <td><span class="badge-status badge-pend">En camino</span></td>
-                </tr>
-                <tr>
-                  <td>022</td>
-                  <td>María S.</td>
-                  <td>1/2 kg Helado x4</td>
-                  <td>$1.800</td>
-                  <td><span class="badge-status badge-ok">Listo</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>-->
-        </div><!-- end admin-panel -->
-        </div><!-- end device-frame -->
+          <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
+            <img src="notebook-panel.png" alt="Panel de administración en notebook" />
+          </div>
+          <div class="sp-img-card" onclick="openLightbox('monitor-sin-fondo.png')">
+            <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor de escritorio" />
+          </div>
+        </div>
       </div>
+
+      <!-- ── PANEL B: Multiplataforma ── -->
+      <div class="sp-panel sp-panel--b">
+        <div class="sp-text">
+          <span class="section-label">Multiplataforma</span>
+          <h2>Tu app funciona en cualquier dispositivo, sin instalar nada</h2>
+          <p>Desde un celular hasta una pantalla de escritorio. Tus clientes acceden a tu carta vía link o QR, sin descargas, sin fricciones.</p>
+          <ul class="sp-feat-list">
+            <li><span class="icon">📱</span><span>Experiencia optimizada para celular: la forma más común en que tus clientes piden.</span></li>
+            <li><span class="icon">💻</span><span>También funciona perfecto desde computadoras, para clientes que prefieren un pantalla grande.</span></li>
+            <li><span class="icon">🔗</span><span>Un solo link o QR personalizado. Nada de instalar apps ni crear cuentas.</span></li>
+            <li><span class="icon">⚡</span><span>Carga ultrarrápida y diseño responsivo que se adapta al tamaño de cada pantalla.</span></li>
+          </ul>
+        </div>
+        <div class="sp-gallery">
+          <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
+            <img src="notebook-panel.png" alt="Panel en notebook" />
+          </div>
+          <div class="sp-img-card" onclick="openLightbox('computer.png')">
+            <img src="computer.png" alt="WhatsOrder en monitor" />
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /track -->
+
+    <!-- Progress & hint -->
+    <div class="sp-progress" id="spProgress">
+      <div class="sp-progress-bar"><div class="sp-progress-fill" id="spFill"></div></div>
+      <span class="sp-progress-label" id="spLabel">01 / 02</span>
     </div>
-  </div>
+    <div class="sp-scroll-hint" id="spHint">
+      Desplazá
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </div>
+  </div><!-- /sticky -->
 </section>
+
+<script>
+(function() {
+  var section = document.getElementById('muestreo-utilidades');
+  var sticky  = document.getElementById('spSticky');
+  var track   = document.getElementById('spTrack');
+  var fill    = document.getElementById('spFill');
+  var label   = document.getElementById('spLabel');
+  var hint    = document.getElementById('spHint');
+
+  if (!section || !track) return;
+
+  // Solo activa scroll-driven en desktop
+  function isDesktop() { return window.innerWidth > 900; }
+
+  var panels = track.querySelectorAll('.sp-panel');
+  var totalPanels = panels.length;
+  var maxOffset = 0; // se calcula en resize
+
+  function calcMax() {
+    if (!isDesktop()) { maxOffset = 0; return; }
+    // El track tiene totalPanels paneles de 100vw c/u.
+    // Queremos que el último panel quede completamente visible al final del scroll.
+    maxOffset = (totalPanels - 1) * window.innerWidth;
+  }
+
+  function onScroll() {
+    if (!isDesktop()) return;
+
+    var sectionTop    = section.getBoundingClientRect().top + window.scrollY;
+    var sectionHeight = section.offsetHeight;
+    var scrollY       = window.scrollY;
+
+    // Progreso 0→1 dentro del rango scrollable de la section
+    var scrollable = sectionHeight - window.innerHeight;
+    var progress = Math.max(0, Math.min(1, (scrollY - sectionTop) / scrollable));
+
+    var offset = progress * maxOffset;
+    track.style.transform = 'translateX(-' + offset + 'px)';
+
+    // Progress bar y label
+    var pct = Math.round(progress * 100);
+    if (fill)  fill.style.width = pct + '%';
+    if (label) label.textContent = '0' + (Math.min(Math.ceil(progress * totalPanels) || 1, totalPanels)) + ' / 0' + totalPanels;
+
+    // Ocultar hint tras primer scroll
+    if (hint && progress > 0.05) hint.style.opacity = '0';
+    if (hint && progress <= 0.02) hint.style.opacity = '1';
+  }
+
+  function onResize() {
+    calcMax();
+    onScroll();
+  }
+
+  calcMax();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize);
+  onScroll();
+})();
+</script>
 
 <!-- HOW IT WORKS -->
 <section id="como-funciona">
