@@ -38,31 +38,67 @@
   /* ───── HEADER ───── */
   header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
+    /*display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    backdrop-filter: blur(18px);*/
     padding: 0 5vw;
-    height: 68px;
-    background: #ffffff;
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(0,0,0,0.10);
+    height: 88px;
+    background: transparent;
+  }
+  .header-wrapper {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 3vw;
+    width: 100%; max-width: 1200px; margin: 1vw auto 0;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 145%);/*linear-gradient(to bottom, rgb(237 228 255 / 15%) 24%, transparent 110%);
+    border: 1px solid rgba(255,255,255,0.12);*/
+    box-shadow: inset 0 0 0 2px rgb(44 37 71 / 25%);
+    border-radius: 40px;
+    gap: 70px;
   }
   .logo {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; flex-direction: column; align-items: center; /*gap: 4px;*/
+    justify-content: center;
+    grid-column: 2;
+    position: relative;
+    /*padding: 0 24px 12px;*/
+  }
+  /* Glow blanco debajo del logo, como halo de luz */
+  .logo::after {
+    content: '';
+    position: absolute;
+    bottom: 0px; left: 50%; transform: translateX(-50%);
+    width: 133%; height: 86px;
+    /*background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.15) 20%, transparent 105%);*/
+    pointer-events: none;
+    z-index: -1;
   }
   .logo img {
-    height: 46px; width: auto;
+    height: 70px; width: auto;
+    filter: brightness(1.1);
+    transform:scale(3.5)
   }
   .logo-text {
     font-family: 'Poppins', sans-serif;
-    font-weight: 800; font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    color: #111111;
+    font-weight: 800; font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
   }
-  nav { display: flex; align-items: center; gap: 2rem; }
+  nav {
+    display: flex; align-items: center; gap: 15px;
+    grid-column: 1; /* izquierda */
+    justify-content: flex-start;
+  }
   nav a {
-    font-size: 0.875rem; color: #555555;
-    transition: color .2s;
+    font-size: 0.895rem; color: rgb(0 0 0 / 70%);/* antes estaba rgba(255,255,255,0.55);*/
+    transition: color .2s; font-weight: bold;
   }
-  nav a:hover { color: #111111; }
+  nav a:hover { color: #ffffff; }
+  /* El CTA (#contacto) va a la derecha (col 3) */
+  nav a[href="#contacto"] {
+    grid-column: 3;
+    margin-left: auto;
+  }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 10px 22px;
@@ -81,26 +117,93 @@
   }
   .btn-outline:hover { border-color: var(--violet-light); color: var(--violet-light); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: #111111; border-radius: 2px; transition: all .3s; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all .3s; }
+  .header-right {
+    grid-column: 3;
+    display: flex; align-items: center; justify-content: flex-end;
+    gap: 12px;
+  }
 
   /* ───── HERO ───── */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center;
-    padding: 120px 5vw 80px;
+    padding: 140px 5vw 80px;
     position: relative;
     overflow: hidden;
+    background: var(--black);
   }
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(124,58,237,0.22) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(124,58,237,0.10) 0%, transparent 60%);
+    background: radial-gradient(ellipse 60% 50% at 62% 40%, rgba(124,58,237,0.09) 0%, transparent 70%),
+                radial-gradient(ellipse 35% 35% at 18% 82%, rgba(124,58,237,0.05) 0%, transparent 65%);
   }
   .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 4rem;
-    position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+    position: relative; z-index: 1; max-width: 900px; margin: 0 auto; width: 100%;
+  }
+  .hero-content {
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .hero-content p { max-width: 560px; }
+  .hero-content .hero-ctas { justify-content: center; }
+  .hero-content .hero-stats { justify-content: center; }
+  .hero-img-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  /* Tarjetas superpuestas estilo "green area" del ejemplo */
+  .hero-slides-deck {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    height: 395px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .hero-slide-card {
+    position: absolute;
+    background: var(--grey-1);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.45);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .hero-slide-card:nth-child(1) {
+    width: 52%; left: -125px; bottom: 0;
+    transform: rotate(-4deg) translateY(8px);
+    z-index: 1;
+  }
+  .hero-slide-card:nth-child(2) {
+    width: 56%; left: 50%; transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 3;
+  }
+  .hero-slide-card:nth-child(3) {
+    width: 52%; right: -125px; bottom: 0;
+    transform: rotate(4deg) translateY(8px);
+    z-index: 1;
+  }
+  .hero-slide-card:hover { z-index: 10; transform: translateY(-8px) rotate(0deg) scale(1.03); box-shadow: 0 24px 64px rgba(124,58,237,0.25); }
+  .hero-slide-card:nth-child(2):hover { transform: translateX(-50%) translateY(-10px) scale(1.04); }
+  .hero-slide-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .hero-slide-card-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    padding: 18px 14px 10px;
+    font-size: 0.75rem; color: rgba(255,255,255,0.7);
+    font-family: 'Poppins', sans-serif; font-weight: 500;
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
@@ -252,9 +355,9 @@
 
   /* ───── INDUSTRIES / CAROUSEL ───── */
   .industries-section {
-    background: var(--grey-1);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    background: var(--black);
+    /*border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);*/
   }
   .carousel-wrapper {
     display: flex; align-items: center; gap: 12px;
@@ -433,7 +536,7 @@
   }
 
   /* ───── PRICING ───── */
-  .pricing-section { background: var(--grey-1); }
+  .pricing-section { background: var(--black); }
   .pricing-top { text-align: center; margin-bottom: 3rem; }
   .pricing-top .section-sub { margin: 0 auto; }
   .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
@@ -503,7 +606,7 @@
   .install-price .sublabel { font-size: 0.75rem; color: var(--grey-5); margin-top: 4px; }
 
   /* ───── FAQ ───── */
-  .faq-section { background: var(--grey-1); }
+  .faq-section { background: var(--black); }
   .faq-top { text-align: center; margin-bottom: 3rem; }
   .faq-top .section-sub { margin: 0 auto; }
   .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 900px; margin: 0 auto; }
@@ -539,36 +642,36 @@
 
   /* ───── FOOTER ───── */
   footer {
-    background: #ffffff;
-    border-top: 1px solid rgba(0,0,0,0.10);
+    background: var(--black);
+    /*border-top: 1px solid var(--border);*/
     padding: 60px 5vw 36px;
-    color: #111111;
+    color: var(--white);
   }
   .footer-inner { max-width: 1200px; margin: 0 auto; }
   .footer-top {
     display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
     margin-bottom: 3rem;
   }
-  .footer-brand .logo-text { font-size: 1.1rem; margin-top: 6px; color: #111111; }
-  .footer-brand p { font-size: 0.875rem; color: #666666; margin-top: 10px; line-height: 1.6; max-width: 280px; }
-  .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 1rem; }
+  .footer-brand .logo-text { font-size: 1.1rem; margin-top: 6px; color: var(--white); }
+  .footer-brand p { font-size: 0.875rem; color: var(--grey-4); margin-top: 10px; line-height: 1.6; max-width: 280px; }
+  .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-4); margin-bottom: 1rem; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .footer-col ul li a { font-size: 0.875rem; color: #444444; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--violet); }
+  .footer-col ul li a { font-size: 0.875rem; color: var(--grey-5); transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--violet-light); }
   .footer-bottom {
-    border-top: 1px solid rgba(0,0,0,0.08);
+    border-top: 1px solid var(--border);
     padding-top: 24px; display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 12px;
   }
-  .footer-bottom p { font-size: 0.8rem; color: #888888; }
+  .footer-bottom p { font-size: 0.8rem; color: var(--grey-4); }
   .footer-social { display: flex; gap: 12px; }
   .footer-social a {
     width: 36px; height: 36px; border-radius: 8px;
-    background: #f0f0f0; border: 1px solid rgba(0,0,0,0.08);
+    background: var(--grey-1); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 1rem; transition: all .2s;
   }
-  .footer-social a:hover { border-color: var(--violet); background: var(--violet-dim); }
+  .footer-social a:hover { border-color: var(--violet-light); background: var(--violet-dim); }
 
   /* ───── FLOATING WA ───── */
   .wa-float {
@@ -584,18 +687,22 @@
 
   /* ───── RESPONSIVE ───── */
   @media (max-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-img-wrap { max-width: 540px; margin: 0 auto; }
     .feat-split { grid-template-columns: 1fr; }
     .feat-split.reverse { direction: ltr; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .carousel-card { flex: 0 0 calc(50% - 8px); }
+    /*.hero-slides-deck { height: 280px; }*/
   }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     nav { display: none; }
-    nav.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.10); padding: 20px 5vw; gap: 1.2rem; z-index: 99; }
+    nav.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: var(--black); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 5vw; gap: 1.2rem; z-index: 99; }
     .hamburger { display: flex; }
+    .header-right .btn { display: none; } /* hide CTA on mobile, hamburger takes over */
+    .hero-slides-deck { height: 220px; max-width: 100%; }
+    .hero-slide-card:nth-child(1) { width: 55%; }
+    .hero-slide-card:nth-child(2) { width: 60%; }
+    .hero-slide-card:nth-child(3) { width: 55%; }
     .steps { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     .faq-grid { grid-template-columns: 1fr; }
@@ -634,19 +741,23 @@
 
 <!-- HEADER -->
 <header>
-  <a href="#" class="logo">
-    <img src="icono.png" alt="WhatsOrder logo" />
-    <span class="logo-text">WHATS ORDER.</span>
-  </a>
-  <nav id="main-nav">
-    <a href="#como-funciona">Cómo funciona</a>
-    <a href="#beneficios">Beneficios</a>
-    <a href="#planes">Planes</a>
-    <a href="#faq">Consultas</a>
-    <a href="#contacto" class="btn btn-primary">Empezá hoy</a>
-  </nav>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
+  <div class="header-wrapper">
+    <nav id="main-nav">
+      <a href="#beneficios">Beneficios</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#planes">Planes</a>
+      <a href="#faq">Consultas</a>
+    </nav>
+    <a href="#" class="logo">
+      <img src="logo gif.gif" alt="WhatsOrder logo" />
+      <!-- <span class="logo-text">WHATS ORDER.</span> -->
+    </a>
+    <div class="header-right">
+      <a href="#contacto" class="btn btn-primary">Empezá hoy</a>
+      <div class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -685,12 +796,18 @@
     </div>
 
     <div class="hero-img-wrap anim-fadeup delay-2">
-      <div class="hero-device-frame">
-        <div class="hero-slide-viewport">
-          <div class="hero-slide-track" id="heroSlideTrack">
-            <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" class="hero-slide-img" />
-            <img src="notebook-phone-sin-fondo.png" alt="WhatsOrder en notebook y celular" class="hero-slide-img" />
-          </div>
+      <div class="hero-slides-deck">
+        <div class="hero-slide-card">
+          <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" />
+          <div class="hero-slide-card-label">Vista escritorio</div>
+        </div>
+        <div class="hero-slide-card">
+          <img src="notebook-phone-sin-fondo.png" alt="WhatsOrder en notebook y celular" />
+          <div class="hero-slide-card-label">Multi-dispositivo</div>
+        </div>
+        <div class="hero-slide-card">
+          <img src="monitor-sin-fondo.png" alt="WhatsOrder panel admin" />
+          <div class="hero-slide-card-label">Panel de gestión</div>
         </div>
       </div>
     </div>
@@ -780,8 +897,9 @@
   </div>
 </section>
 
-<!-- FEAT 2: Panel admin -->
-<section style="background:var(--grey-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+<!-- FEAT 2: Panel admin 
+    style="background:var(--grey-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);" -->
+<section>
   <div class="section-inner">
     <div class="feat-split reverse">
       <div class="feat-content">
@@ -897,7 +1015,7 @@
   </div>
 </section>
 
-<!-- INSTALLATION COST -->
+<!-- INSTALLATION COST
 <section style="padding-top:0;padding-bottom:96px;">
   <div class="section-inner">
     <div class="install-box">
@@ -913,7 +1031,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- PRICING -->
 <section class="pricing-section" id="planes">
