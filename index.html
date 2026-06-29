@@ -21,6 +21,10 @@
     --grey-5: #b0b0bc;
     --border: rgba(255,255,255,0.08);
   }
+    @font-face {
+      font-family: 'MiFuentePersonalizada';
+      src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype'); /* Ruta de tu archivo */
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -31,7 +35,10 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
-  h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; line-height: 1.15; }
+  h1, h2 {
+    font-family: 'MiFuentePersonalizada', sans-serif;
+  }
+  h3,h4 { font-family: 'Poppins', sans-serif; line-height: 1.15; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
 
@@ -49,18 +56,17 @@
   .header-wrapper {
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 3vw;
     width: 100%; max-width: 1200px; margin: 1vw auto 0;
-    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 145%);/*linear-gradient(to bottom, rgb(237 228 255 / 15%) 24%, transparent 110%);
+    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 165%);/*linear-gradient(to bottom, rgb(237 228 255 / 15%) 24%, transparent 110%);
     border: 1px solid rgba(255,255,255,0.12);*/
     box-shadow: inset 0 0 0 2px rgb(44 37 71 / 25%);
     border-radius: 40px;
     gap: 70px;
   }
   .logo {
-    display: flex; flex-direction: column; align-items: center; /*gap: 4px;*/
-    justify-content: center;
+    display: flex;/* flex-direction: column; align-items: center; gap: 4px; padding: 0 24px 12px;*/
+    justify-content: start;
     grid-column: 2;
     position: relative;
-    /*padding: 0 24px 12px;*/
   }
   /* Glow blanco debajo del logo, como halo de luz */
   .logo::after {
@@ -217,6 +223,7 @@
     font-size: clamp(2.4rem, 4.5vw, 3.8rem);
     font-weight: 800; margin-bottom: 1.2rem;
     line-height: 1.1;
+    text-transform: uppercase;
   }
   .hero h1 span { color: var(--violet-light); }
   .hero p {
@@ -522,10 +529,15 @@
   /* ───── HOW IT WORKS ───── */
   .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
   .step { position: relative; }
+  .step-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
   .step-num {
     font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 800;
     color: var(--violet-dim); line-height: 1; margin-bottom: 0.8rem;
-    -webkit-text-stroke: 1px rgba(124,58,237,0.4);
+    -webkit-text-stroke: 1px rgba(124, 58, 237, 0.705);
     color: transparent;
   }
   .step-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
@@ -952,7 +964,7 @@
     grid-template-columns: 400px 1fr;
     align-items: center;
     gap: 0;
-    padding: 0 5vw 0 max(5vw, 60px);
+    padding: 0 7vw 0 max(8vw, 60px);
     position: relative;
   }
   /* Separador vertical entre paneles */
@@ -1009,7 +1021,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 40px 0;
+    padding: 40px;
     overflow: visible;
   }
   .sp-img-card {
@@ -1295,20 +1307,26 @@
     <p class="section-sub" style="text-align:center;margin:0 auto 3rem;">Sin tecnicismos ni complicaciones. Te armamos todo, vos solo te enfocás en vender.</p>
     <div class="steps">
       <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-icon">🤝</div>
+        <div class="step-title-wrapper">
+          <div class="step-num">01</div>
+          <div class="step-icon"><img src="apreton icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🤝-->
+        </div>
         <h3>Nos contactás</h3>
         <p>Hablamos por WhatsApp, entendemos tu negocio y te explicamos cómo funciona la plataforma sin compromiso.</p>
       </div>
       <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-icon">🎨</div>
+        <div class="step-title-wrapper">
+          <div class="step-num">02</div>
+          <div class="step-icon"><img src="colores icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🎨-->
+        </div>
         <h3>Personalizamos tu app</h3>
         <p>Cargamos tu carta completa, tus precios, fotos y los colores de tu marca. Tu app queda lista en 24 horas.</p>
       </div>
       <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-icon">🚀</div>
+        <div class="step-title-wrapper">
+          <div class="step-num">03</div>
+          <div class="step-icon">🚀</div>
+        </div>
         <h3>Salís online y vendés más</h3>
         <p>Compartís el link o QR con tus clientes y empezás a recibir pedidos organizados directo a tu WhatsApp.</p>
       </div>
@@ -1347,7 +1365,7 @@
       <!-- PLAN BÁSICO -->
       <div class="plan-card">
         <div class="plan-name">Plan Básico</div>
-        <div class="plan-price">$30.000<span>/mes</span></div>
+        <div class="plan-price">$15.000<span>/mes</span></div>
         <div class="plan-desc">Para negocios que solo necesitan que el sistema siga funcionando perfectamente.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -1364,7 +1382,7 @@
       <!-- PLAN PREMIUM -->
       <div class="plan-card">
         <div class="plan-name">Plan Premium</div>
-        <div class="plan-price">$60.000<span>/mes</span></div>
+        <div class="plan-price">$20.000<span>/mes</span></div>
         <div class="plan-desc">Para negocios que buscan estadísticas y soporte más activo para crecer.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -1384,7 +1402,7 @@
       <div class="plan-card featured">
         <div class="plan-featured-badge">✅ Recomendado</div>
         <div class="plan-name">Plan Full</div>
-        <div class="plan-price">$100.000<span>/mes</span></div>
+        <div class="plan-price">$35.000<span>/mes</span></div>
         <div class="plan-desc">La opción ideal para negocios que quieren crecer y delegar todo lo digital.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
