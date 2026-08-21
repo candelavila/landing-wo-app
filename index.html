@@ -23,7 +23,7 @@
   }
     @font-face {
       font-family: 'MiFuentePersonalizada';
-      src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype'); /* Ruta de tu archivo */
+      src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype'); 
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -45,8 +45,6 @@
   /* ───── HEADER ───── */
   header {
     position: fixed; top: 0; left: 0; z-index: 100;
-    /* Usamos width:100% en lugar de right:0 para evitar que el header
-       genere scrollbar horizontal cuando body tiene overflow-x:hidden */
     width: 100%;
     padding: 0 5vw;
     height: 88px;
@@ -56,25 +54,22 @@
   .header-wrapper {
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 3vw;
     width: 100%; max-width: 1200px; margin: 1vw auto 0;
-    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 165%);/*linear-gradient(to bottom, rgb(237 228 255 / 15%) 24%, transparent 110%);
-    border: 1px solid rgba(255,255,255,0.12);*/
+    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 165%);
     box-shadow: inset 0 0 0 2px rgb(44 37 71 / 25%);
     border-radius: 40px;
     gap: 70px;
   }
   .logo {
-    display: flex;/* flex-direction: column; align-items: center; gap: 4px; padding: 0 24px 12px;*/
+    display: flex;
     justify-content: start;
     grid-column: 2;
     position: relative;
   }
-  /* Glow blanco debajo del logo, como halo de luz */
   .logo::after {
     content: '';
     position: absolute;
     bottom: 0px; left: 50%; transform: translateX(-50%);
     width: 133%; height: 86px;
-    /*background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.15) 20%, transparent 105%);*/
     pointer-events: none;
     z-index: -1;
   }
@@ -83,24 +78,16 @@
     filter: brightness(1.1);
     transform:scale(3.5)
   }
-  .logo-text {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800; font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.75);
-    text-align: center;
-  }
   nav {
     display: flex; align-items: center; gap: 15px;
-    grid-column: 1; /* izquierda */
+    grid-column: 1; 
     justify-content: flex-start;
   }
   nav a {
-    font-size: 0.895rem; color: rgb(0 0 0 / 70%);/* antes estaba rgba(255,255,255,0.55);*/
+    font-size: 0.895rem; color: rgb(0 0 0 / 70%);
     transition: color .2s; font-weight: bold;
   }
   nav a:hover { color: #ffffff; }
-  /* El CTA (#contacto) va a la derecha (col 3) */
   nav a[href="#contacto"] {
     grid-column: 3;
     margin-left: auto;
@@ -165,6 +152,7 @@
     display: flex;
     justify-content: center;
   }
+
   /* Tarjetas superpuestas estilo "green area" del ejemplo */
   .hero-slides-deck {
     position: relative;
@@ -231,52 +219,9 @@
     max-width: 450px; margin-bottom: 2rem; line-height: 1.7;
   }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-  .hero-img-wrap {
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-mockup {
-    width: 100%; border-radius: 18px;
-    object-fit: cover;
-    display: block;
-  }
-  /* Fake app screenshot placeholder */
-  .mock-screen {
-    background: #12121a; border-radius: 18px;
-    overflow: hidden; padding: 0;
-  }
-  .mock-bar {
-    background: var(--violet); padding: 12px 20px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .mock-bar-icon { font-size: 1.2rem; }
-  .mock-bar-title { font-family: 'Poppins', sans-serif; font-weight: 700; color: #fff; font-size: 0.9rem; }
-  .mock-body { padding: 16px; }
-  .mock-cat { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .mock-cat span {
-    padding: 5px 12px; border-radius: 20px; font-size: 0.72rem;
-    background: var(--violet-dim); color: var(--violet-light);
-    border: 1px solid rgba(124,58,237,0.3); cursor: pointer;
-  }
-  .mock-cat span.active { background: var(--violet); color: #fff; border-color: var(--violet); }
-  .mock-items { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .mock-item {
-    background: var(--grey-2); border-radius: 12px; overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .mock-item-img {
-    height: 70px; background: var(--grey-3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem;
-  }
-  .mock-item-info { padding: 8px; }
-  .mock-item-name { font-size: 0.72rem; font-weight: 600; font-family: 'Poppins', sans-serif; }
-  .mock-item-price { font-size: 0.68rem; color: var(--violet-light); margin-top: 2px; }
-  .mock-add { margin-top: 6px; background: var(--violet); color: #fff; border: none; border-radius: 6px; padding: 4px 10px; font-size: 0.65rem; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; width: 100%; }
   .hero-stats {
     display: flex; gap: 24px; margin-top: 2.5rem; flex-wrap: wrap;
   }
-  .hero-stat { }
   .hero-stat-num { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--violet-light); }
   .hero-stat-label { font-size: 0.75rem; color: var(--grey-4); margin-top: 2px; }
 
@@ -294,7 +239,7 @@
   }
   .section-sub { font-size: 1rem; color: var(--grey-5); max-width: 450px; line-height: 1.7; }
 
-  /* ───── FEATURE SPLIT (como setmore post-hero) ───── */
+  /* ───── FEATURE SPLIT ───── */
   .feat-split {
     display: grid; grid-template-columns: 1fr 1fr;
     align-items: center; gap: 5rem;
@@ -326,54 +271,13 @@
     background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
   }
 
-  /* Admin panel mockup */
-  .admin-panel {
-    background: #0e0e16; border-radius: 14px; overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .admin-topbar {
-    background: var(--grey-1); padding: 10px 16px;
-    display: flex; align-items: center; gap: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .admin-dots { display: flex; gap: 5px; }
-  .admin-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--grey-3); }
-  .admin-dots span:nth-child(1) { background: #ff5f57; }
-  .admin-dots span:nth-child(2) { background: #ffbd2e; }
-  .admin-dots span:nth-child(3) { background: #28c840; }
-  .admin-title { font-size: 0.75rem; color: var(--grey-4); font-family: 'Poppins', sans-serif; }
-  .admin-body { padding: 16px; }
-  .admin-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
-  .admin-card {
-    background: var(--grey-2); border-radius: 10px; padding: 12px;
-    border: 1px solid var(--border);
-  }
-  .admin-card-label { font-size: 0.65rem; color: var(--grey-4); margin-bottom: 4px; }
-  .admin-card-val { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
-  .admin-card-sub { font-size: 0.62rem; color: var(--violet-light); margin-top: 2px; }
-  .admin-table { width: 100%; border-collapse: collapse; }
-  .admin-table th { font-size: 0.62rem; color: var(--grey-4); text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--border); }
-  .admin-table td { font-size: 0.68rem; color: var(--grey-5); padding: 6px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-  .badge-status {
-    display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 0.6rem; font-weight: 600;
-  }
-  .badge-ok { background: rgba(40,200,64,0.15); color: #28c840; }
-  .badge-pend { background: rgba(255,189,46,0.15); color: #ffbd2e; }
-
   /* ───── INDUSTRIES / CAROUSEL ───── */
-  .industries-section {
-    background: var(--black);
-    /*border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);*/
-  }
+  .industries-section { background: var(--black); }
   .carousel-wrapper {
     display: flex; align-items: center; gap: 12px;
-    margin-top: 2.5rem;
-    position: relative;
+    margin-top: 2.5rem; position: relative;
   }
-  .carousel-viewport {
-    overflow: hidden; flex: 1;
-  }
+  .carousel-viewport { overflow: hidden; flex: 1; }
   .carousel-track {
     display: flex; gap: 16px;
     transition: transform .4s cubic-bezier(.4,0,.2,1);
@@ -406,9 +310,7 @@
     transition: all .2s; z-index: 2;
   }
   .carousel-btn:hover { background: var(--violet); border-color: var(--violet); }
-  .carousel-dots {
-    display: flex; justify-content: center; gap: 8px; margin-top: 1.2rem;
-  }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.2rem; }
   .carousel-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--grey-3); cursor: pointer; transition: background .2s, transform .2s;
@@ -425,8 +327,7 @@
   .lightbox img {
     max-width: 90vw; max-height: 85vh; border-radius: 12px;
     box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-    cursor: default;
-    animation: fadeUp .25s ease;
+    cursor: default; animation: fadeUp .25s ease;
   }
   .lightbox-close {
     position: absolute; top: 20px; right: 24px;
@@ -437,103 +338,28 @@
   }
   .lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
-  /* ───── DEVICE FRAME (beneficios, feat-2) ───── */
+  /* ───── DEVICE FRAME ───── */
   .device-frame {
-    width: 100%;
-    border-radius: 22px;
-    /* Fondo radial suave que desaparece hacia los bordes */
-    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
-    border: none; /* Sin bordes rígidos para mejorar el fundido */
-    box-shadow: 
-      0 0 100px rgba(124, 58, 237, 0.12), /* Resplandor exterior difuminado */
-      inset 0 0 40px rgba(124, 58, 237, 0.05); /* Luz interior sutil */
-    padding: 24px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Quitamos la línea dura superior para mantener el diseño limpio */
-  .device-frame::before {
-    display: none;
-  }
-
-  /* ───── HERO DEVICE FRAME (seamless, no border) ───── */
-  .hero-device-frame {
-    width: 100%;
-    border-radius: 22px;
-    /* Fondo radial suave que desaparece hacia los bordes */
+    width: 100%; border-radius: 22px;
     background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
     border: none;
-    /* Resplandor exterior difuminado y luz interior sutil */
-    box-shadow: 
-      0 0 100px rgba(124, 58, 237, 0.12),
-      inset 0 0 40px rgba(124, 58, 237, 0.05);
-    padding: 20px 20px 12px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 100px rgba(124, 58, 237, 0.12), inset 0 0 40px rgba(124, 58, 237, 0.05);
+    padding: 24px; position: relative; display: flex; justify-content: center; align-items: center;
   }
+  .device-frame::before { display: none; }
 
-  /* Hero slide */
-  .hero-slide-viewport {
-    overflow: hidden;
-    width: 100%;
-    border-radius: 10px;
-  }
-  .hero-slide-track {
-    display: flex;
-    transition: transform .7s cubic-bezier(.4,0,.2,1);
-    will-change: transform;
-  }
-  .hero-slide-img {
-    min-width: 100%; width: 100%;
-    height: auto; display: block;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-  .phone-qr-combo {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    min-height: 420px;
-  }
-  .combo-phone {
-    width: 68%;
-    max-width: 300px;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5));
-  }
-  .combo-qr {
-    width: 38%;
-    max-width: 170px;
-    height: auto;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 2%;
-    z-index: 3;
-    border-radius: 14px;
-    background: #fff;
-    padding: 8px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    transform: rotate(3deg);
+  .hero-device-frame {
+    width: 100%; border-radius: 22px;
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
+    border: none;
+    box-shadow: 0 0 100px rgba(124, 58, 237, 0.12), inset 0 0 40px rgba(124, 58, 237, 0.05);
+    padding: 20px 20px 12px; position: relative; display: flex; justify-content: center; align-items: center;
   }
 
   /* ───── HOW IT WORKS ───── */
   .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
   .step { position: relative; }
-  .step-title-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
+  .step-title-wrapper { display: flex; align-items: center; gap: 15px; }
   .step-num {
     font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 800;
     color: var(--violet-dim); line-height: 1; margin-bottom: 0.8rem;
@@ -543,9 +369,6 @@
   .step-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
   .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
   .step p { font-size: 0.9rem; color: var(--grey-5); line-height: 1.6; }
-  .step-connector {
-    display: none;
-  }
 
   /* ───── PRICING ───── */
   .pricing-section { background: var(--black); }
@@ -553,15 +376,12 @@
   .pricing-top .section-sub { margin: 0 auto; }
   .pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
   .plan-card {
-    background: var(--black);
-    border: 1px solid var(--border);
+    background: var(--black); border: 1px solid var(--border);
     border-radius: 20px; padding: 32px 28px;
-    display: flex; flex-direction: column;
-    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
     transition: transform .22s, border-color .22s;
   }
-  .plan-card:hover,
-  .redes-sociales a:hover { transform: translateY(-4px); border-color: var(--violet-light); background: var(--violet-dim); }
+  .plan-card:hover, .redes-sociales a:hover { transform: translateY(-4px); border-color: var(--violet-light); background: var(--violet-dim); }
   .plan-card.featured {
     border-color: var(--violet);
     background: linear-gradient(160deg, rgba(124,58,237,0.12), var(--black) 60%);
@@ -578,10 +398,7 @@
   .plan-desc { font-size: 0.85rem; color: var(--grey-4); margin-bottom: 1.6rem; line-height: 1.5; }
   .plan-divider { height: 1px; background: var(--border); margin-bottom: 1.4rem; }
   .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .plan-features li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 0.875rem; color: var(--grey-5); line-height: 1.45;
-  }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--grey-5); line-height: 1.45; }
   .plan-features li .chk {
     flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%;
     background: var(--violet-dim); display: flex; align-items: center; justify-content: center;
@@ -589,34 +406,8 @@
   }
   .plan-features li .chk svg { width: 10px; height: 10px; stroke: var(--violet-light); stroke-width: 2.5; fill: none; }
   .plan-cta { margin-top: 1.8rem; }
-  .plan-cta .btn { width: 100%; justify-content: center; padding: 13px; font-size: 0.9rem; }
   .pricing-note { text-align: center; margin-top: 1.8rem; font-size: 0.82rem; color: var(--grey-4); }
   .pricing-note a { color: var(--violet-light); text-decoration: underline; }
-
-  /* ───── INSTALLATION ───── */
-  .install-box {
-    background: var(--grey-1);
-    border: 1px solid var(--border);
-    border-radius: 20px; padding: 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 2rem; flex-wrap: wrap;
-    position: relative; overflow: hidden;
-  }
-  .install-box::before {
-    content: ''; position: absolute; right: -80px; top: -80px;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%);
-  }
-  .install-text h2 { font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; margin-bottom: 0.8rem; }
-  .install-text p { font-size: 0.95rem; color: var(--grey-5); max-width: 480px; }
-  .install-price {
-    background: var(--black); border: 1px solid var(--violet);
-    border-radius: 16px; padding: 28px 36px; text-align: center;
-    flex-shrink: 0;
-  }
-  .install-price .label { font-size: 0.75rem; color: var(--grey-4); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .install-price .amount { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.4rem; color: var(--violet-light); }
-  .install-price .sublabel { font-size: 0.75rem; color: var(--grey-5); margin-top: 4px; }
 
   /* ───── FAQ ───── */
   .faq-section { background: var(--black); }
@@ -625,27 +416,19 @@
   .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 900px; margin: 0 auto; }
   .faq-item {
     background: var(--black); border: 1px solid var(--border);
-    border-radius: 14px; overflow: hidden;
-    transition: transform .22s, border-color .22s;
+    border-radius: 14px; overflow: hidden; transition: transform .22s, border-color .22s;
   }
-  .faq-item:hover {
-    transform: translateY(-4px);
-    border-color: var(--violet-light);
-  }
+  .faq-item:hover { transform: translateY(-4px); border-color: var(--violet-light); }
   .faq-q {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 22px; cursor: pointer;
-    font-weight: 600; font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
-    gap: 12px;
-    transition: color .2s;
+    padding: 18px 22px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif; gap: 12px; transition: color .2s;
   }
   .faq-q:hover { color: var(--violet-light); }
   .faq-q .arrow {
     flex-shrink: 0; width: 22px; height: 22px;
     border: 1.5px solid var(--grey-3); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    transition: all .25s;
+    display: flex; align-items: center; justify-content: center; transition: all .25s;
   }
   .faq-q .arrow svg { width: 10px; height: 10px; stroke: var(--grey-4); stroke-width: 2; fill: none; transition: transform .25s; }
   .faq-item.open .faq-q .arrow { border-color: var(--violet); background: var(--violet-dim); }
@@ -653,23 +436,14 @@
   .faq-a {
     display: none; padding: 0 22px 18px;
     font-size: 0.875rem; color: var(--grey-5); line-height: 1.65;
-    border-top: 1px solid var(--border);
-    padding-top: 14px;
+    border-top: 1px solid var(--border); padding-top: 14px;
   }
   .faq-item.open .faq-a { display: block; }
 
   /* ───── FOOTER ───── */
-  footer {
-    background: var(--black);
-    /*border-top: 1px solid var(--border);*/
-    padding: 60px 5vw 36px;
-    color: var(--white);
-  }
+  footer { background: var(--black); padding: 60px 5vw 36px; color: var(--white); }
   .footer-inner { max-width: 1200px; margin: 0 auto; }
-  .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
-    margin-bottom: 3rem;
-  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
   .footer-brand .logo-text { font-size: 1.1rem; margin-top: 6px; color: var(--white); }
   .footer-brand p { font-size: 0.875rem; color: var(--grey-4); margin-top: 10px; line-height: 1.6; max-width: 280px; }
   .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-4); margin-bottom: 1rem; }
@@ -677,15 +451,13 @@
   .footer-col ul li a { font-size: 0.875rem; color: var(--grey-5); transition: color .2s; }
   .footer-col ul li a:hover { color: var(--violet-light); }
   .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: 24px; display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between;
     flex-wrap: wrap; gap: 12px;
   }
   .footer-bottom p { font-size: 0.8rem; color: var(--grey-4); }
-  /*.footer-social*/ 
   .redes-sociales a {
     width: 115px; height: 115px; border-radius: 8px;
-    /*background: var(--grey-1);*/ border: 1px solid var(--border);
+    border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 1rem; transition: all .2s;
     transition: transform .22s, border-color .22s;
@@ -696,83 +468,30 @@
     position: fixed; bottom: 28px; right: max(16px, 2vw); z-index: 999;
     width: 56px; height: 56px; border-radius: 50%;
     background: #25d366; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 6px 24px rgba(37,211,102,0.4);
-    transition: transform .2s, box-shadow .2s;
-    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4); transition: transform .2s, box-shadow .2s; cursor: pointer;
   }
   .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(37,211,102,0.55); }
   .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
   /* ── Hero carousel (activo en ≤1219px) ── */
-  .hero-carousel-viewport {
-    display: none; /* oculto en desktop */
-    overflow: hidden;
-    width: 100%;
-    border-radius: 16px;
-    position: relative;
-  }
-  .hero-carousel-track {
-    display: flex;
-    gap: 0;
-    transition: transform .55s cubic-bezier(.4,0,.2,1);
-    will-change: transform;
-  }
-  .hero-carousel-slide {
-    flex-shrink: 0;
-    width: 100%;
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-    background: var(--grey-1);
-    border: 1px solid rgba(255,255,255,0.10);
-  }
-  .hero-carousel-slide img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-  }
-  .hero-carousel-slide .hero-slide-card-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    padding: 18px 14px 10px;
-    font-size: 0.75rem; color: rgba(255,255,255,0.7);
-    font-family: 'Poppins', sans-serif; font-weight: 500;
-  }
-  .hero-carousel-controls {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 14px;
-  }
-  .hero-carousel-btn {
-    flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
-    background: var(--grey-2); border: 1px solid var(--border);
-    color: var(--white); font-size: 1.4rem; line-height: 1;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: all .2s;
-  }
+  .hero-carousel-viewport { display: none; overflow: hidden; width: 100%; border-radius: 16px; position: relative; }
+  .hero-carousel-track { display: flex; gap: 0; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .hero-carousel-slide { flex-shrink: 0; width: 100%; border-radius: 14px; overflow: hidden; position: relative; background: var(--grey-1); border: 1px solid rgba(255,255,255,0.10); }
+  .hero-carousel-slide img { width: 100%; height: 260px; object-fit: cover; display: block; }
+  .hero-carousel-slide .hero-slide-card-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.65)); padding: 18px 14px 10px; font-size: 0.75rem; color: rgba(255,255,255,0.7); font-family: 'Poppins', sans-serif; font-weight: 500; }
+  .hero-carousel-controls { display: none; justify-content: center; align-items: center; gap: 12px; margin-top: 14px; }
+  .hero-carousel-btn { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--grey-2); border: 1px solid var(--border); color: var(--white); font-size: 1.4rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
   .hero-carousel-btn:hover { background: var(--violet); border-color: var(--violet); }
-  .hero-carousel-dots {
-    display: flex; gap: 7px;
-  }
-  .hero-carousel-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--grey-3); cursor: pointer;
-    transition: background .2s, transform .2s;
-  }
+  .hero-carousel-dots { display: flex; gap: 7px; }
+  .hero-carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--grey-3); cursor: pointer; transition: background .2s, transform .2s; }
   .hero-carousel-dot.active { background: var(--violet); transform: scale(1.3); }
 
   /* ───── RESPONSIVE ───── */
-
-  /* ── Hero: activar carousel en lugar del deck superpuesto ── */
   @media (max-width: 1219px) {
     .hero-slides-deck { display: none; }
     .hero-carousel-viewport { display: block; }
     .hero-carousel-controls { display: flex; }
   }
-
   @media (max-width: 1024px) {
     .feat-split { grid-template-columns: 1fr; }
     .feat-split.reverse { direction: ltr; }
@@ -783,48 +502,25 @@
   @media (max-width: 767px) {
     nav { display: none; }
     nav.open { 
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 78px;/*68px*/
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgb(255 255 255 / 75%) 90%, transparent 165%);/*var(--black)*/
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 20px 5vw;
-      gap: 1.2rem;
-      z-index: 99;
-      width: 90%;
-      margin: auto;
-      border-radius: 20px;
+      display: flex; flex-direction: column; position: fixed;
+      top: 78px; left: 0; right: 0;
+      background: linear-gradient(to top, rgb(255 255 255 / 75%) 90%, transparent 165%);
+      border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 5vw; gap: 1.2rem;
+      z-index: 99; width: 90%; margin: auto; border-radius: 20px;
     }
     .hamburger { display: flex; }
-    .header-right .btn { display: none; } /* hide CTA on mobile, hamburger takes over */
-    .hero-slides-deck { height: 220px; max-width: 100%; }
-    .hero-slide-card:nth-child(1) { width: 55%; }
-    .hero-slide-card:nth-child(2) { width: 60%; }
-    .hero-slide-card:nth-child(3) { width: 55%; }
+    .header-right .btn { display: none; }
     .steps { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     .faq-grid { grid-template-columns: 1fr; }
-    .install-box { padding: 28px; }
     .footer-top { grid-template-columns: 1fr; gap: 2rem; }
     .carousel-card { flex: 0 0 calc(100% - 0px); }
     .hero-stats { gap: 16px; }
-    .admin-cards { grid-template-columns: 1fr 1fr; }
-    .phone-qr-combo { min-height: 300px; }
-    .combo-phone { width: 65%; }
-    .combo-qr { width: 40%; }
   }
   @media (max-width: 512px) {
-    /* El gif escalado al 3.5x desbordaba el header y tapaba el botón hamburguesa */
-    .logo img {
-      transform: scale(2.2);
-      height: 50px;
-    }
+    .logo img { transform: scale(2.2); height: 50px; }
   }
   @media (max-width: 480px) {
-    .industries-grid { grid-template-columns: repeat(2,1fr); }
     .hero-ctas { flex-direction: column; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
   }
@@ -837,7 +533,6 @@
   .delay-3 { animation-delay: .3s; }
   .delay-4 { animation-delay: .4s; }
 
-  /* Noise texture overlay */
   body::after {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
@@ -858,7 +553,6 @@
     </nav>
     <a href="#" class="logo">
       <img src="logo gif.gif" alt="WhatsOrder logo" />
-      <!-- <span class="logo-text">WHATS ORDER.</span> -->
     </a>
     <div class="header-right">
       <a href="login.php" class="btn btn-primary">Acceder</a>
@@ -884,8 +578,7 @@
         <a href="#planes" class="btn btn-primary">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
           Quiero mi app
-        </a><!-- 
-        <a href="#como-funciona" class="btn btn-outline">Ver demo</a>-->
+        </a>
       </div>
       <div class="hero-stats anim-fadeup delay-4">
         <div class="hero-stat">
@@ -902,47 +595,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="hero-img-wrap anim-fadeup delay-2">
-      <div class="hero-slides-deck">
-        <div class="hero-slide-card">
-          <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" />
-          <div class="hero-slide-card-label">Vista escritorio</div>
-        </div>
-        <div class="hero-slide-card">
-          <img src="notebook-phone-sin-fondo.png" alt="WhatsOrder en notebook y celular" />
-          <div class="hero-slide-card-label">Multi-dispositivo</div>
-        </div>
-        <div class="hero-slide-card">
-          <img src="monitor-sin-fondo.png" alt="WhatsOrder panel admin" />
-          <div class="hero-slide-card-label">Panel de gestión</div>
-        </div>
-      </div>
-
-      // Hero carousel: visible solo en ≤1219px 
-      <div class="hero-carousel-viewport" id="heroCarouselVp">
-        <div class="hero-carousel-track" id="heroCarouselTrack">
-          <div class="hero-carousel-slide">
-            <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" />
-            <div class="hero-slide-card-label">Vista escritorio</div>
-          </div>
-          <div class="hero-carousel-slide">
-            <img src="notebook-phone-sin-fondo.png" alt="WhatsOrder en notebook y celular" />
-            <div class="hero-slide-card-label">Multi-dispositivo</div>
-          </div>
-          <div class="hero-carousel-slide">
-            <img src="monitor-sin-fondo.png" alt="WhatsOrder panel admin" />
-            <div class="hero-slide-card-label">Panel de gestión</div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-carousel-controls" id="heroCarouselControls">
-        <button class="hero-carousel-btn" onclick="heroCarouselPrev()" aria-label="Anterior">&#8249;</button>
-        <div class="hero-carousel-dots" id="heroCarouselDots"></div>
-        <button class="hero-carousel-btn" onclick="heroCarouselNext()" aria-label="Siguiente">&#8250;</button>
-      </div>
-
-    </div>  -->
   </div>
 </section>
 
@@ -1033,12 +685,11 @@
   </div>
 </section>
 
-<!-- MUESTREO UTILIDADES: scroll-driven horizontal panorama (inspired by Rockstar VI) -->
+<!-- MUESTREO UTILIDADES: scroll-driven horizontal panorama -->
 <style>
   /* ── Scroll Panorama ── */
   .scroll-panorama {
     position: relative;
-    /* altura total del scroll = 100vh (sticky) + espacio extra para el avance horizontal */
     height: 280vh;
     padding: 0;
   }
@@ -1050,7 +701,6 @@
     display: flex;
     align-items: center;
   }
-  /* Degradado izquierdo para fundir el borde */
   .scroll-panorama__sticky::before,
   .scroll-panorama__sticky::after {
     content: '';
@@ -1074,7 +724,6 @@
     align-items: stretch;
     gap: 0;
     will-change: transform;
-    /* Empieza visible, JS lo mueve */
     transform: translateX(0);
     transition: transform 0.05s linear;
   }
@@ -1091,7 +740,6 @@
     padding: 0 7vw 0 max(16vw, 60px);
     position: relative;
   }
-  /* Separador vertical entre paneles */
   .sp-panel + .sp-panel {
     border-left: 1px solid var(--border);
   }
@@ -1303,10 +951,11 @@
           <h2>Panel de control para gestionar todo desde donde estés</h2>
           <p>Administrá tu carta, controlá pedidos en tiempo real, descargá estadísticas y tomá mejores decisiones con datos reales.</p>
           <ul class="sp-feat-list">
-            <li><span class="icon">📦</span><span>Agregá, editá o desactivá productos, precios, fotos y categorías en segundos.</span></li>
-            <li><span class="icon">📊</span><span>Estadísticas de ventas diarias, semanales y mensuales. Ticket promedio y más vendidos.</span></li>
-            <li><span class="icon">📥</span><span>Exportá tu historial de pedidos en Excel para llevar un control real de tu negocio.</span></li>
-            <li><span class="icon">🏪</span><span>Soporte para múltiples sucursales, cada una con su panel y WhatsApp propio.</span></li>
+            <li><span class="icon">🗂️</span><span><strong>Panel de administración completo:</strong> Productos, categorías, grupos de opciones, métodos de pago, promociones y horarios. Cambios ilimitados, cuando quieras.</span></li>
+            <li><span class="icon">📋</span><span><strong>Gestión de pedidos con trazabilidad:</strong> Estados, historial y registro de quién cambió qué y cuándo. Todo controlado.</span></li>
+            <li><span class="icon">📊</span><span><strong>Estadísticas del negocio:</strong> Productos más vendidos y horarios más concurridos por el rango de fechas que elijas. Exportables en imagen o Excel.</span></li>
+            <li><span class="icon">📱</span><span><strong>Catálogo público mobile-first:</strong> Carta para tus clientes con carrito y pedido directo por WhatsApp. Sin apps, sin cuentas.</span></li>
+            <li><span class="icon">🎨</span><span><strong>Personalización de marca:</strong> Colores, logo y redes sociales. Tu identidad, no la nuestra.</span></li>
           </ul>
         </div>
         <div class="sp-gallery">
@@ -1370,17 +1019,14 @@
 
   if (!section || !track) return;
 
-  // Solo activa scroll-driven en desktop
   function isDesktop() { return window.innerWidth > 900; }
 
   var panels = track.querySelectorAll('.sp-panel');
   var totalPanels = panels.length;
-  var maxOffset = 0; // se calcula en resize
+  var maxOffset = 0; 
 
   function calcMax() {
     if (!isDesktop()) { maxOffset = 0; return; }
-    // El track tiene totalPanels paneles de 100vw c/u.
-    // Queremos que el último panel quede completamente visible al final del scroll.
     maxOffset = (totalPanels - 1) * window.innerWidth;
   }
 
@@ -1391,19 +1037,16 @@
     var sectionHeight = section.offsetHeight;
     var scrollY       = window.scrollY;
 
-    // Progreso 0→1 dentro del rango scrollable de la section
     var scrollable = sectionHeight - window.innerHeight;
     var progress = Math.max(0, Math.min(1, (scrollY - sectionTop) / scrollable));
 
     var offset = progress * maxOffset;
     track.style.transform = 'translateX(-' + offset + 'px)';
 
-    // Progress bar y label
     var pct = Math.round(progress * 100);
     if (fill)  fill.style.width = pct + '%';
     if (label) label.textContent = '0' + (Math.min(Math.ceil(progress * totalPanels) || 1, totalPanels)) + ' / 0' + totalPanels;
 
-    // Ocultar hint tras primer scroll
     if (hint && progress > 0.05) hint.style.opacity = '0';
     if (hint && progress <= 0.02) hint.style.opacity = '1';
   }
@@ -1432,7 +1075,7 @@
       <div class="step">
         <div class="step-title-wrapper">
           <div class="step-num">01</div>
-          <div class="step-icon"><img src="apreton icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🤝-->
+          <div class="step-icon"><img src="apreton icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div>
         </div>
         <h3>Nos contactás</h3>
         <p>Hablamos por WhatsApp, entendemos tu comercio y te explicamos cómo funciona la plataforma sin compromiso.</p>
@@ -1440,7 +1083,7 @@
       <div class="step">
         <div class="step-title-wrapper">
           <div class="step-num">02</div>
-          <div class="step-icon"><img src="colores icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🎨-->
+          <div class="step-icon"><img src="colores icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div>
         </div>
         <h3>Personaliza tu app</h3>
         <p>Cargá tu carta completa, tus precios, fotos, los colores de tu marca y tus redes. Tu tienda queda lista al instante.</p>
@@ -1457,24 +1100,6 @@
   </div>
 </section>
 
-<!-- INSTALLATION COST
-<section style="padding-top:0;padding-bottom:96px;">
-  <div class="section-inner">
-    <div class="install-box">
-      <div class="install-text">
-        <h2>Costo único de instalación y personalización</h2>
-        <p>Incluye todo lo necesario para dejar tu app lista: carga completa de la carta con fotos y precios, configuración de métodos de pago, personalización con los colores y tipografía de tu marca, y QR personalizado para tu local.</p>
-      </div>
-      <div class="install-price">
-        <div class="label">Pago único</div>
-        <div class="amount">$200.000</div>
-        <div class="sublabel">y listo en 24hs</div>
-        <a href="#contacto" class="btn btn-primary" style="margin-top:14px;width:100%;justify-content:center;">Quiero empezar</a>
-      </div>
-    </div>
-  </div>
-</section> -->
-
 <!-- PRICING -->
 <section class="pricing-section" id="planes">
   <div class="section-inner">
@@ -1482,48 +1107,6 @@
       <span class="section-label">Planes</span>
       <h2 class="section-title">Un solo plan. Todo incluido.</h2>
       <p class="section-sub">Sin niveles confusos, sin funciones recortadas. Elegís mensual o anual según lo que mejor te convenga.</p>
-    </div>
-
-    <!-- Features incluidas siempre (software) -->
-    <div style="max-width:860px;margin:0 auto 3rem;">
-      <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet-light);margin-bottom:1.2rem;font-family:'Poppins',sans-serif;">El software — incluido siempre</p>
-      <div id="grid-funcionalidades" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
-        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;">🗂️</span>
-          <div>
-            <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Panel de administración completo</p>
-            <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Productos, categorías, grupos de opciones, métodos de pago, promociones y horarios. Cambios ilimitados, cuando quieras.</p>
-          </div>
-        </div>
-        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;">📋</span>
-          <div>
-            <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Gestión de pedidos con trazabilidad</p>
-            <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Estados, historial y registro de quién cambió qué y cuándo. Todo controlado.</p>
-          </div>
-        </div>
-        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;">📊</span>
-          <div>
-            <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Estadísticas del negocio</p>
-            <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Productos más vendidos y horarios más concurridos por el rango de fechas que elijas. Exportables en imagen o Excel.</p>
-          </div>
-        </div>
-        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;">📱</span>
-          <div>
-            <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Catálogo público mobile-first</p>
-            <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Carta para tus clientes con carrito y pedido directo por WhatsApp. Sin apps, sin cuentas.</p>
-          </div>
-        </div>
-        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;">🎨</span>
-          <div>
-            <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Personalización de marca</p>
-            <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Colores, logo y redes sociales. Tu identidad, no la nuestra.</p>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Dos cards de precio -->
@@ -1590,7 +1173,7 @@
           ¿Cuánto tiempo tarda en estar lista mi app?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
-        <div class="faq-a">Una vez que nos enviás tu carta, precios, fotos y colores de marca, dejamos todo listo en 24 horas. Solo tenés que compartir el link o QR con tus clientes y ya estás online.</div>
+        <div class="faq-a">Tu app está lista al instante. Una vez que te registrás, podés cargar tu menú, configurar tus precios, fotos y colores de marca vos mismo desde el panel de administración. Solo tenés que compartir tu link o QR y ya estás online.</div>
       </div>
 
       <div class="faq-item">
@@ -1600,14 +1183,6 @@
         </div>
         <div class="faq-a">No. Cero comisión por pedido. Solo pagás el plan mensual que elijas. Cuanto más vendés, más te conviene.</div>
       </div>
-      <!-- 
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Puedo cambiar mi carta o precios cuando quiero?
-          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
-        </div>
-        <div class="faq-a">Con el Plan Básico tenés 1 cambio por mes. Con Premium y Full los cambios son ilimitados. En todos los casos respondemos rápido para que tu carta siempre esté actualizada.</div>
-      </div> -->
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -1632,14 +1207,6 @@
         </div>
         <div class="faq-a">Todos los pedidos y datos son tuyos. Antes de cancelar podés descargar tu historial completo en Excel. Tus datos nunca se comparten con terceros.</div>
       </div>
-      <!-- 
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Funciona para comercios con más de una sucursal?
-          <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
-        </div>
-        <div class="faq-a">Sí, con el Plan Full gestionás múltiples sucursales desde un mismo sistema. Cada una tiene su propio panel y su propio WhatsApp de pedidos, con cartas y precios independientes.</div>
-      </div>-->
 
     </div>
   </div>
@@ -1652,18 +1219,10 @@
     <h2 class="section-title" style="margin:0 auto 1rem;">¿Listo para digitalizar tu comercio?</h2>
     <p class="section-sub" style="margin:0 auto 2.5rem;">Si tenes dudas, escribenos y en minutos te contamos todo. Sin compromisos, sin tecnicismos.</p>
     <div class="redes-sociales" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <!--<a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20info%20sobre%20WhatsOrder" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.524 5.847L.057 23.083a1 1 0 001.226 1.226l5.236-1.467A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.515-5.163-1.414l-.37-.221-3.107.87.87-3.107-.22-.371A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
-        Escribinos por WhatsApp
-      </a>
-      <a href="mailto:hola@whatsorder.app" class="btn btn-outline" style="font-size:1rem;padding:14px 32px;">
-        hola@whatsorder.app
-      </a>-->
       <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram"><img src="logo-ig.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
       <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp"><img src="logo-wpp.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
       <a href="mailto:hola@whatsorder.app" title="Email"><img src="logo-gmail.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
     </div>
-    <!--<p style="font-size:0.8rem;color:var(--grey-4);margin-top:1.2rem;">También nos encontrás en Instagram: <a href="https://instagram.com/whatsorder.app" style="color:var(--violet-light);">@whatsorder.app</a></p>-->
   </div>
 </section>
 
@@ -1674,14 +1233,8 @@
       <div class="footer-brand">
         <div class="logo">
           <img src="logo3d.png" alt="WhatsOrder" style="height:36px; margin: 0 0 25px 15px;" />
-         <!-- <span class="logo-text">WHATS ORDER.</span>-->
         </div>
         <p>Soluciones digitales para comercios/emprendimientos que quieren crecer, organizarse y vender más con pedidos por WhatsApp.</p>
-        <!--<div class="footer-social" style="margin-top:16px;">
-          <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram"><img src="logo-ig.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
-          <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp"><img src="logo-wpp.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
-          <a href="mailto:hola@whatsorder.app" title="Email"><img src="logo-gmail.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
-        </div>-->
       </div>
       <div class="footer-col">
         <h4>Producto</h4>
