@@ -153,52 +153,6 @@
     justify-content: center;
   }
 
-  /* Tarjetas superpuestas estilo "green area" del ejemplo */
-  .hero-slides-deck {
-    position: relative;
-    width: 100%;
-    max-width: 780px;
-    height: 395px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .hero-slide-card {
-    position: absolute;
-    background: var(--grey-1);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.45);
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .hero-slide-card:nth-child(1) {
-    width: 52%; left: -125px; bottom: 0;
-    transform: rotate(-4deg) translateY(8px);
-    z-index: 1;
-  }
-  .hero-slide-card:nth-child(2) {
-    width: 56%; left: 50%; transform: translateX(-50%);
-    bottom: 20px;
-    z-index: 3;
-  }
-  .hero-slide-card:nth-child(3) {
-    width: 52%; right: -125px; bottom: 0;
-    transform: rotate(4deg) translateY(8px);
-    z-index: 1;
-  }
-  .hero-slide-card:hover { z-index: 10; transform: translateY(-8px) rotate(0deg) scale(1.03); box-shadow: 0 24px 64px rgba(124,58,237,0.25); }
-  .hero-slide-card:nth-child(2):hover { transform: translateX(-50%) translateY(-10px) scale(1.04); }
-  .hero-slide-card img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .hero-slide-card-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    padding: 18px 14px 10px;
-    font-size: 0.75rem; color: rgba(255,255,255,0.7);
-    font-family: 'Poppins', sans-serif; font-weight: 500;
-  }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--violet-dim); border: 1px solid rgba(124,58,237,0.35);
@@ -238,38 +192,6 @@
     font-weight: 800; margin-bottom: 1rem;
   }
   .section-sub { font-size: 1rem; color: var(--grey-5); max-width: 450px; line-height: 1.7; }
-
-  /* ───── FEATURE SPLIT ───── */
-  .feat-split {
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 5rem;
-  }
-  .feat-split.reverse { direction: rtl; }
-  .feat-split.reverse > * { direction: ltr; }
-  .feat-list { list-style: none; margin-top: 1.8rem; display: flex; flex-direction: column; gap: 14px; }
-  .feat-list li {
-    display: flex; align-items: flex-start; gap: 12px;
-    font-size: 0.95rem; color: var(--grey-5);
-  }
-  .feat-list li .icon {
-    flex-shrink: 0; width: 28px; height: 28px;
-    background: var(--violet-dim); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem; margin-top: 1px;
-  }
-  .feat-visual {
-    background: var(--grey-1);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .feat-visual::before {
-    content: ''; position: absolute; top: -40px; right: -40px;
-    width: 180px; height: 180px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 70%);
-  }
 
   /* ───── INDUSTRIES / CAROUSEL ───── */
   .industries-section { background: var(--black); }
@@ -338,22 +260,248 @@
   }
   .lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
-  /* ───── DEVICE FRAME ───── */
-  .device-frame {
-    width: 100%; border-radius: 22px;
-    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
-    border: none;
-    box-shadow: 0 0 100px rgba(124, 58, 237, 0.12), inset 0 0 40px rgba(124, 58, 237, 0.05);
-    padding: 24px; position: relative; display: flex; justify-content: center; align-items: center;
+  /* ───── SCROLL PANORAMA (NUEVA SECCIÓN BENEFICIOS) ───── */
+  .scroll-panorama {
+    position: relative;
+    height: 280vh;
+    padding: 0;
   }
-  .device-frame::before { display: none; }
+  .scroll-panorama__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .scroll-panorama__sticky::before,
+  .scroll-panorama__sticky::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .scroll-panorama__sticky::before {
+    left: 0;
+    background: linear-gradient(to right, var(--black), transparent);
+  }
+  .scroll-panorama__sticky::after {
+    right: 0;
+    background: linear-gradient(to left, var(--black), transparent);
+  }
 
-  .hero-device-frame {
-    width: 100%; border-radius: 22px;
-    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 75%);
-    border: none;
-    box-shadow: 0 0 100px rgba(124, 58, 237, 0.12), inset 0 0 40px rgba(124, 58, 237, 0.05);
-    padding: 20px 20px 12px; position: relative; display: flex; justify-content: center; align-items: center;
+  .scroll-panorama__track {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    will-change: transform;
+    transform: translateX(0);
+    transition: transform 0.05s linear;
+  }
+
+  .sp-panel {
+    flex-shrink: 0;
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 470px 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 0 7vw 0 max(21vw, 60px);
+    position: relative;
+  }
+  .sp-panel + .sp-panel {
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-text {
+    padding-right: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+  .sp-text .section-label { margin-bottom: 0.8rem; }
+  .sp-text h2 {
+    font-size: clamp(1.65rem, 2.4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.12;
+  }
+  .sp-text p {
+    font-size: 0.95rem;
+    color: var(--grey-5);
+    line-height: 1.7;
+    max-width: 340px;
+    margin-bottom: 1.6rem;
+  }
+  .sp-feat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sp-feat-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--grey-5);
+    line-height: 1.5;
+  }
+  .sp-feat-list li .icon {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: var(--violet-dim);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    margin-top: 1px;
+  }
+
+  .sp-gallery {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 40px;
+    overflow: visible;
+  }
+  .sp-img-card {
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid var(--border);
+    background: var(--grey-1);
+    transition: transform 0.28s cubic-bezier(.25,.46,.45,.94), box-shadow 0.28s;
+  }
+  .sp-img-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.28);
+    border-color: rgba(124,58,237,0.4);
+    z-index: 5;
+  }
+  .sp-img-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .sp-img-card:hover img { transform: scale(1.04); }
+
+  .sp-img-card::after {
+    content: '↗';
+    position: absolute;
+    bottom: 12px; right: 14px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 32px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.22s, transform 0.22s;
+    pointer-events: none;
+  }
+  .sp-img-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .sp-panel--a .sp-img-card:nth-child(1) { width: 200px; height: 300px; }
+  .sp-img-card:nth-child(1) img { object-position: center top; }
+  .sp-panel--a .sp-img-card:nth-child(2) { width: 330px; height: 420px; transform: translateY(20px); }
+  .sp-panel--a .sp-img-card:nth-child(3) { width: 240px; height: 340px; }
+
+  .sp-panel--b .sp-img-card:nth-child(1) { width: 360px; height: 440px; }
+  .sp-panel--b .sp-img-card:nth-child(2) { width: 280px; height: 360px; transform: translateY(30px); }
+
+  .sp-progress {
+    position: absolute;
+    bottom: 0px;
+    left: max(16vw, 60px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+  }
+  .sp-progress-bar {
+    width: 200px; height: 2px;
+    background: var(--grey-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sp-progress-fill {
+    height: 100%;
+    background: var(--violet-light);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+  .sp-progress-label {
+    font-size: 0.7rem;
+    color: var(--grey-4);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .sp-scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    right: 5vw;
+    font-size: 0.7rem;
+    color: var(--grey-4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 1;
+    transition: opacity 0.5s;
+    z-index: 20;
+  }
+  .sp-scroll-hint svg {
+    width: 16px; height: 16px;
+    stroke: var(--grey-4);
+    animation: nudge 1.8s ease-in-out infinite;
+  }
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+  }
+
+  @media (max-width: 1114px) {
+    .scroll-panorama { height: auto; }
+    .scroll-panorama__sticky { position: relative; height: auto; overflow: visible; flex-direction: column; }
+    .scroll-panorama__sticky::before,
+    .scroll-panorama__sticky::after { display: none; }
+    .scroll-panorama__track { flex-direction: column; transform: none !important; }
+    .sp-panel {
+      grid-template-columns: 1fr;
+      width: 100%;
+      min-height: auto;
+      padding: 64px 5vw;
+      gap: 2.5rem;
+    }
+    .sp-panel + .sp-panel { border-left: none; border-top: 1px solid var(--border); }
+    .sp-text { padding-right: 0; }
+    .sp-gallery { flex-wrap: wrap; justify-content: center; overflow: visible; padding: 0; }
+    .sp-panel--a .sp-img-card:nth-child(1),
+    .sp-panel--a .sp-img-card:nth-child(2),
+    .sp-panel--a .sp-img-card:nth-child(3),
+    .sp-panel--b .sp-img-card:nth-child(1),
+    .sp-panel--b .sp-img-card:nth-child(2) {
+      width: calc(50% - 10px);
+      height: 200px;
+      transform: none !important;
+    }
+    .sp-progress, .sp-scroll-hint { display: none; }
   }
 
   /* ───── HOW IT WORKS ───── */
@@ -473,28 +621,8 @@
   .wa-float:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(37,211,102,0.55); }
   .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
-  /* ── Hero carousel (activo en ≤1219px) ── */
-  .hero-carousel-viewport { display: none; overflow: hidden; width: 100%; border-radius: 16px; position: relative; }
-  .hero-carousel-track { display: flex; gap: 0; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
-  .hero-carousel-slide { flex-shrink: 0; width: 100%; border-radius: 14px; overflow: hidden; position: relative; background: var(--grey-1); border: 1px solid rgba(255,255,255,0.10); }
-  .hero-carousel-slide img { width: 100%; height: 260px; object-fit: cover; display: block; }
-  .hero-carousel-slide .hero-slide-card-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.65)); padding: 18px 14px 10px; font-size: 0.75rem; color: rgba(255,255,255,0.7); font-family: 'Poppins', sans-serif; font-weight: 500; }
-  .hero-carousel-controls { display: none; justify-content: center; align-items: center; gap: 12px; margin-top: 14px; }
-  .hero-carousel-btn { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--grey-2); border: 1px solid var(--border); color: var(--white); font-size: 1.4rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
-  .hero-carousel-btn:hover { background: var(--violet); border-color: var(--violet); }
-  .hero-carousel-dots { display: flex; gap: 7px; }
-  .hero-carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--grey-3); cursor: pointer; transition: background .2s, transform .2s; }
-  .hero-carousel-dot.active { background: var(--violet); transform: scale(1.3); }
-
   /* ───── RESPONSIVE ───── */
-  @media (max-width: 1219px) {
-    .hero-slides-deck { display: none; }
-    .hero-carousel-viewport { display: block; }
-    .hero-carousel-controls { display: flex; }
-  }
   @media (max-width: 1024px) {
-    .feat-split { grid-template-columns: 1fr; }
-    .feat-split.reverse { direction: ltr; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .carousel-card { flex: 0 0 calc(50% - 8px); }
@@ -515,7 +643,6 @@
     .faq-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 2rem; }
     .carousel-card { flex: 0 0 calc(100% - 0px); }
-    .hero-stats { gap: 16px; }
   }
   @media (max-width: 512px) {
     .logo img { transform: scale(2.2); height: 50px; }
@@ -660,287 +787,8 @@
   </div>
 </section>
 
-<!-- FEAT 1: Para el cliente -->
-<section id="beneficios">
-  <div class="section-inner">
-    <div class="feat-split">
-      <div class="feat-content">
-        <span class="section-label">Para tus clientes</span>
-        <h2 class="section-title">Pedir en segundos, sin llamadas ni confusiones</h2>
-        <p class="section-sub">El cliente ve tu carta con fotos, precios y combos, elige lo que quiere y con un toque el pedido llega directo a tu WhatsApp. Todo claro, todo detallado.</p>
-        <ul class="feat-list">
-          <li><span class="icon">📸</span><span>Carta digital con fotos, descripción y precios actualizados en tiempo real.</span></li>
-          <li><span class="icon">🛒</span><span>Carrito de compras simple: el cliente arma su pedido a su ritmo.</span></li>
-          <li><span class="icon">💬</span><span>Con un solo clic el pedido llega completo a tu WhatsApp con todos los detalles.</span></li>
-          <li><span class="icon">🚚</span><span>Soporte para delivery o retiro en local, con ingreso de dirección.</span></li>
-          <li><span class="icon">💳</span><span>Múltiples métodos de pago que vos configurás desde el panel.</span></li>
-        </ul>
-      </div>
-      <div class="feat-visual" style="background:transparent;border:none;padding:0;overflow:visible;">
-        <div class="device-frame">
-          <img src="phone-qr2.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;" />
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MUESTREO UTILIDADES: scroll-driven horizontal panorama -->
-<style>
-  /* ── Scroll Panorama ── */
-  .scroll-panorama {
-    position: relative;
-    height: 280vh;
-    padding: 0;
-  }
-  .scroll-panorama__sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
-  .scroll-panorama__sticky::before,
-  .scroll-panorama__sticky::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 80px;
-    z-index: 10;
-    pointer-events: none;
-  }
-  .scroll-panorama__sticky::before {
-    left: 0;
-    background: linear-gradient(to right, var(--black), transparent);
-  }
-  .scroll-panorama__sticky::after {
-    right: 0;
-    background: linear-gradient(to left, var(--black), transparent);
-  }
-
-  .scroll-panorama__track {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    will-change: transform;
-    transform: translateX(0);
-    transition: transform 0.05s linear;
-  }
-
-  /* ── Cada panel dentro del track ── */
-  .sp-panel {
-    flex-shrink: 0;
-    width: 100vw;
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 400px 1fr;
-    align-items: center;
-    gap: 0;
-    padding: 0 7vw 0 max(16vw, 60px);
-    position: relative;
-  }
-  .sp-panel + .sp-panel {
-    border-left: 1px solid var(--border);
-  }
-
-  /* Texto fijo a la izquierda */
-  .sp-text {
-    padding-right: 3rem;
-    position: relative;
-    z-index: 2;
-  }
-  .sp-text .section-label { margin-bottom: 0.8rem; }
-  .sp-text h2 {
-    font-size: clamp(1.65rem, 2.4vw, 2.4rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    line-height: 1.12;
-  }
-  .sp-text p {
-    font-size: 0.95rem;
-    color: var(--grey-5);
-    line-height: 1.7;
-    max-width: 340px;
-    margin-bottom: 1.6rem;
-  }
-  .sp-feat-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .sp-feat-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.88rem;
-    color: var(--grey-5);
-    line-height: 1.5;
-  }
-  .sp-feat-list li .icon {
-    flex-shrink: 0;
-    width: 26px; height: 26px;
-    background: var(--violet-dim);
-    border-radius: 7px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem;
-    margin-top: 1px;
-  }
-
-  /* Galería de imágenes a la derecha */
-  .sp-gallery {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 40px;
-    overflow: visible;
-  }
-  .sp-img-card {
-    flex-shrink: 0;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: zoom-in;
-    border: 1px solid var(--border);
-    background: var(--grey-1);
-    transition: transform 0.28s cubic-bezier(.25,.46,.45,.94), box-shadow 0.28s;
-  }
-  .sp-img-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(124,58,237,0.28);
-    border-color: rgba(124,58,237,0.4);
-    z-index: 5;
-  }
-  .sp-img-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  .sp-img-card:hover img { transform: scale(1.04); }
-
-  /* Overlay zoom icon */
-  .sp-img-card::after {
-    content: '↗';
-    position: absolute;
-    bottom: 12px; right: 14px;
-    font-size: 1rem;
-    color: rgba(255,255,255,0.7);
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    line-height: 32px;
-    text-align: center;
-    opacity: 0;
-    transform: scale(0.7);
-    transition: opacity 0.22s, transform 0.22s;
-    pointer-events: none;
-  }
-  .sp-img-card:hover::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Sizing variado para galería panel 1 (3 imgs) */
-  .sp-panel--a .sp-img-card:nth-child(1) { width: 200px; height: 300px; }
-  .sp-img-card:nth-child(1) img { object-position: center top; }
-  .sp-panel--a .sp-img-card:nth-child(2) { width: 330px; height: 420px; transform: translateY(20px); }
-  .sp-panel--a .sp-img-card:nth-child(3) { width: 240px; height: 340px; }
-
-  /* Sizing variado para galería panel 2 (2 imgs) */
-  .sp-panel--b .sp-img-card:nth-child(1) { width: 360px; height: 440px; }
-  .sp-panel--b .sp-img-card:nth-child(2) { width: 280px; height: 360px; transform: translateY(30px); }
-
-  /* Indicador de progreso */
-  .sp-progress {
-    position: absolute;
-    bottom: 0px;
-    left: max(16vw, 60px);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 20;
-  }
-  .sp-progress-bar {
-    width: 200px; height: 2px;
-    background: var(--grey-2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .sp-progress-fill {
-    height: 100%;
-    background: var(--violet-light);
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.1s linear;
-  }
-  .sp-progress-label {
-    font-size: 0.7rem;
-    color: var(--grey-4);
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.05em;
-  }
-  .sp-scroll-hint {
-    position: absolute;
-    bottom: 28px;
-    right: 5vw;
-    font-size: 0.7rem;
-    color: var(--grey-4);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 1;
-    transition: opacity 0.5s;
-    z-index: 20;
-  }
-  .sp-scroll-hint svg {
-    width: 16px; height: 16px;
-    stroke: var(--grey-4);
-    animation: nudge 1.8s ease-in-out infinite;
-  }
-  @keyframes nudge {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-  }
-
-  /* Mobile: stack vertical */
-  @media (max-width: 900px) {
-    .scroll-panorama { height: auto; }
-    .scroll-panorama__sticky { position: relative; height: auto; overflow: visible; flex-direction: column; }
-    .scroll-panorama__sticky::before,
-    .scroll-panorama__sticky::after { display: none; }
-    .scroll-panorama__track { flex-direction: column; transform: none !important; }
-    .sp-panel {
-      grid-template-columns: 1fr;
-      width: 100%;
-      min-height: auto;
-      padding: 64px 5vw;
-      gap: 2.5rem;
-    }
-    .sp-panel + .sp-panel { border-left: none; border-top: 1px solid var(--border); }
-    .sp-text { padding-right: 0; }
-    .sp-gallery { flex-wrap: wrap; justify-content: center; overflow: visible; padding: 0; }
-    .sp-panel--a .sp-img-card:nth-child(1),
-    .sp-panel--a .sp-img-card:nth-child(2),
-    .sp-panel--a .sp-img-card:nth-child(3),
-    .sp-panel--b .sp-img-card:nth-child(1),
-    .sp-panel--b .sp-img-card:nth-child(2) {
-      width: calc(50% - 10px);
-      height: 200px;
-      transform: none !important;
-    }
-    .sp-progress, .sp-scroll-hint { display: none; }
-  }
-</style>
-
-<section id="muestreo-utilidades" class="scroll-panorama" style="padding:0;">
+<!-- MUESTREO UTILIDADES (NUEVA SECCIÓN BENEFICIOS): scroll-driven horizontal panorama -->
+<section id="beneficios" class="scroll-panorama" style="padding:0;">
   <div class="scroll-panorama__sticky" id="spSticky">
     <div class="scroll-panorama__track" id="spTrack">
 
@@ -959,9 +807,6 @@
           </ul>
         </div>
         <div class="sp-gallery">
-          <div class="sp-img-card" onclick="openLightbox('phone-qr2.png')">
-            <img src="phone-qr2.png" alt="WhatsOrder en celular con QR" />
-          </div>
           <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
             <img src="notebook-panel.png" alt="Panel de administración en notebook" />
           </div>
@@ -988,9 +833,6 @@
           <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
             <img src="notebook-panel.png" alt="Panel en notebook" />
           </div>
-          <div class="sp-img-card" onclick="openLightbox('computer.png')">
-            <img src="computer.png" alt="WhatsOrder en monitor" />
-          </div>
         </div>
       </div>
 
@@ -1010,7 +852,7 @@
 
 <script>
 (function() {
-  var section = document.getElementById('muestreo-utilidades');
+  var section = document.getElementById('beneficios');
   var sticky  = document.getElementById('spSticky');
   var track   = document.getElementById('spTrack');
   var fill    = document.getElementById('spFill');
@@ -1173,7 +1015,7 @@
           ¿Cuánto tiempo tarda en estar lista mi app?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
-        <div class="faq-a">Tu app está lista al instante. Una vez que te registrás, podés cargar tu menú, configurar tus precios, fotos y colores de marca vos mismo desde el panel de administración. Solo tenés que compartir tu link o QR y ya estás online.</div>
+        <div class="faq-a">¡Tu app queda lista al instante! Una vez que te registrás, podés personalizarla, cargar tu menú y configurar tus opciones vos mismo/a desde el panel de administración. Solo compartís tu link y ya estás online.</div>
       </div>
 
       <div class="faq-item">
@@ -1279,46 +1121,14 @@
     nav.classList.toggle('open');
   }
 
-  // ── FAQ: exclusive accordion ──
   function toggleFaq(el) {
     const item = el.parentElement;
     const isOpen = item.classList.contains('open');
-    // Close all
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    // Open only if it wasn't already open
     if (!isOpen) item.classList.add('open');
   }
 
-  // ── HERO SLIDER (auto, 3s) ──
-  const track = document.getElementById('heroSlideTrack');
-  let heroTimer;
-
-  function heroNext() {
-    if (!track) return;
-
-    // 1. Aplicamos la transición suave y desplazamos una imagen a la izquierda
-    track.style.transition = 'transform 0.7s cubic-bezier(.4,0,.2,1)';
-    track.style.transform = 'translateX(-100%)';
-
-    // 2. Esperamos el tiempo exacto que dura la transición en CSS (700ms)
-    setTimeout(() => {
-      // Apagamos la transición momentáneamente
-      track.style.transition = 'none';
-      
-      // Movemos el primer nodo hijo al final de la lista
-      track.appendChild(track.firstElementChild);
-      
-      // Reseteamos visualmente a 0. Como el nodo cambió, muestra la nueva imagen
-      track.style.transform = 'translateX(0)';
-    }, 700);
-  }
-
-  function startHeroTimer() {
-    clearInterval(heroTimer);
-    heroTimer = setInterval(heroNext, 3000);
-  }
-
-  // ── HERO CAROUSEL (≤1219px) ──
+  // ── HERO CAROUSEL ──
   let heroCarouselIdx = 0;
   function getHeroCarouselTrack() { return document.getElementById('heroCarouselTrack'); }
   function getHeroCarouselDots() { return document.getElementById('heroCarouselDots'); }
@@ -1383,9 +1193,8 @@
     carouselIndex = ((page % total) + total) % total;
     const t = getTrack();
     if (!t) return;
-    // Calculamos el desplazamiento exacto: ancho de la primera card × cards por página + gaps entre ellas
     const firstCard = t.firstElementChild;
-    const gap = 16; // igual al gap declarado en .carousel-track
+    const gap = 16; 
     const cardW = firstCard ? firstCard.offsetWidth : 0;
     const cpp = getCardsPerPage();
     const pageWidth = cpp * cardW + (cpp - 1) * gap;
@@ -1415,7 +1224,6 @@
   window.addEventListener('DOMContentLoaded', () => {
     buildDots();
     buildHeroCarouselDots();
-    startHeroTimer();
   });
   window.addEventListener('resize', () => {
     buildDots();
