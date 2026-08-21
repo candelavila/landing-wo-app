@@ -78,7 +78,7 @@
     pointer-events: none;
     z-index: -1;
   }
-  .logo img {
+  .logo-igmg {
     height: 70px; width: auto;
     filter: brightness(1.1);
     transform:scale(3.5)
@@ -228,7 +228,7 @@
   .hero h1 span { color: var(--violet-light); }
   .hero p {
     font-size: 1.05rem; color: var(--grey-5);
-    max-width: 480px; margin-bottom: 2rem; line-height: 1.7;
+    max-width: 450px; margin-bottom: 2rem; line-height: 1.7;
   }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
   .hero-img-wrap {
@@ -292,7 +292,7 @@
     font-size: clamp(1.8rem, 3.2vw, 2.8rem);
     font-weight: 800; margin-bottom: 1rem;
   }
-  .section-sub { font-size: 1rem; color: var(--grey-5); max-width: 560px; line-height: 1.7; }
+  .section-sub { font-size: 1rem; color: var(--grey-5); max-width: 450px; line-height: 1.7; }
 
   /* ───── FEATURE SPLIT (como setmore post-hero) ───── */
   .feat-split {
@@ -551,7 +551,7 @@
   .pricing-section { background: var(--black); }
   .pricing-top { text-align: center; margin-bottom: 3rem; }
   .pricing-top .section-sub { margin: 0 auto; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
   .plan-card {
     background: var(--black);
     border: 1px solid var(--border);
@@ -780,16 +780,16 @@
     <div class="hero-content">
       <div class="hero-badge anim-fadeup">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        Sistema de pedidos online para gastronomía
+        Sistema de pedidos online para comercios
       </div>
-      <h1 class="anim-fadeup delay-1">Tu negocio gastronómico, <span>digitalizado y organizado</span></h1>
-      <p class="anim-fadeup delay-2">Creamos la app personalizada para tu restaurante, heladería, sushi, rotisería o cualquier negocio de comida. Tus clientes piden fácil, vos gestionás todo desde un panel simple.</p>
+      <h1 class="anim-fadeup delay-1">Tu comercio, <span>digitalizado y organizado</span></h1>
+      <p class="anim-fadeup delay-2">Creamos la app personalizada para cualquier comercio. Tus clientes piden fácil, vos gestionás todo desde un panel simple.</p>
       <div class="hero-ctas anim-fadeup delay-3">
         <a href="#contacto" class="btn btn-primary">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
           Quiero mi app
-        </a>
-        <a href="#como-funciona" class="btn btn-outline">Ver demo</a>
+        </a><!-- 
+        <a href="#como-funciona" class="btn btn-outline">Ver demo</a>-->
       </div>
       <div class="hero-stats anim-fadeup delay-4">
         <div class="hero-stat">
@@ -829,9 +829,9 @@
 <!-- INDUSTRIES -->
 <section class="industries-section" id="rubros">
   <div class="section-inner">
-    <span class="section-label">Para todo el rubro gastronómico</span>
-    <h2 class="section-title">Funciona para cualquier negocio de comida</h2>
-    <p class="section-sub">No importa si vendés sushi, pizza, helados o empanadas. WhatsOrder se adapta a tu carta, tus colores y tu forma de trabajar.</p>
+    <span class="section-label">Para todos los rubros</span>
+    <h2 class="section-title">Funciona para cualquier comercio</h2>
+    <p class="section-sub">No importa si tenés heladeria, local de comida rápida, local de bebidas, fotocopiadora, libreria, pet shop, ferreteria, corralón, etc. Whats Order se adapta a tu comercio, tus colores y tu forma de trabajar.</p>
 
     <div class="carousel-wrapper">
       <button class="carousel-btn carousel-prev" onclick="carouselPrev()" aria-label="Anterior">&#8249;</button>
@@ -842,33 +842,37 @@
             <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=500&q=80" alt="Heladería" loading="lazy" />
             <div class="carousel-label">Heladería</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900')">
-            <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=500&q=80" alt="Sushi" loading="lazy" />
-            <div class="carousel-label">Sushi</div>
+          <div class="carousel-card" onclick="openLightbox('hamburgueseria.jpg')">
+            <img src="hamburgueseria.jpg" alt="Sushi" loading="lazy" />
+            <div class="carousel-label">Local de comida rápida</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900')">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" alt="Pizzería" loading="lazy" />
-            <div class="carousel-label">Pizzería</div>
+          <div class="carousel-card" onclick="openLightbox('local-de-bebidas.jpg')">
+            <img src="local-de-bebidas.jpg" alt="Local de bebidas" loading="lazy" />
+            <div class="carousel-label">Local de bebidas</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900')">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" alt="Parrilla" loading="lazy" />
-            <div class="carousel-label">Parrilla</div>
+          <div class="carousel-card" onclick="openLightbox('imprentas.jpg')">
+            <img src="imprentas.jpg" alt="Imprentas" loading="lazy" />
+            <div class="carousel-label">Imprentas</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900')">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80" alt="Hamburguesería" loading="lazy" />
-            <div class="carousel-label">Hamburguesería</div>
+          <div class="carousel-card" onclick="openLightbox('pet-shop.jpg')">
+            <img src="pet-shop.jpg" alt="Pet Shop" loading="lazy" />
+            <div class="carousel-label">Pet Shop</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900')">
-            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80" alt="Panadería" loading="lazy" />
-            <div class="carousel-label">Panadería</div>
+          <div class="carousel-card" onclick="openLightbox('ferreteria.jpg')">
+            <img src="ferreteria.jpg" alt="Ferreterias" loading="lazy" />
+            <div class="carousel-label">Ferreterias</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=900')">
-            <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=500&q=80" alt="Rotisería" loading="lazy" />
-            <div class="carousel-label">Rotisería</div>
+          <div class="carousel-card" onclick="openLightbox('corralon.jpg')">
+            <img src="corralon.jpg" alt="Corralones" loading="lazy" />
+            <div class="carousel-label">Corralones</div>
           </div>
-          <div class="carousel-card" onclick="openLightbox('https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?w=900')">
-            <img src="https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?w=500&q=80" alt="Comida rápida" loading="lazy" />
-            <div class="carousel-label">Comida rápida</div>
+          <div class="carousel-card" onclick="openLightbox('drogueria.jpg')">
+            <img src="drogueria.jpg" alt="Droguerias" loading="lazy" />
+            <div class="carousel-label">Droguerias</div>
+          </div>
+          <div class="carousel-card" onclick="openLightbox('stand-de-feria.jpg')">
+            <img src="stand-de-feria.jpg" alt="Stand de Feria" loading="lazy" />
+            <div class="carousel-label">Stand de Feria</div>
           </div>
         </div>
       </div>
@@ -964,7 +968,7 @@
     grid-template-columns: 400px 1fr;
     align-items: center;
     gap: 0;
-    padding: 0 7vw 0 max(8vw, 60px);
+    padding: 0 7vw 0 max(16vw, 60px);
     position: relative;
   }
   /* Separador vertical entre paneles */
@@ -1086,8 +1090,8 @@
   /* Indicador de progreso */
   .sp-progress {
     position: absolute;
-    bottom: 32px;
-    left: max(5vw, 60px);
+    bottom: 0px;
+    left: max(16vw, 60px);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1183,7 +1187,6 @@
             <li><span class="icon">📊</span><span>Estadísticas de ventas diarias, semanales y mensuales. Ticket promedio y más vendidos.</span></li>
             <li><span class="icon">📥</span><span>Exportá tu historial de pedidos en Excel para llevar un control real de tu negocio.</span></li>
             <li><span class="icon">🏪</span><span>Soporte para múltiples sucursales, cada una con su panel y WhatsApp propio.</span></li>
-            <li><span class="icon">🔔</span><span>Notificaciones instantáneas de pedidos por WhatsApp o email al encargado.</span></li>
           </ul>
         </div>
         <div class="sp-gallery">
@@ -1304,7 +1307,7 @@
       <span class="section-label">Proceso simple</span>
     </div>
     <h2 class="section-title" style="text-align:center;">Estar online en 3 pasos</h2>
-    <p class="section-sub" style="text-align:center;margin:0 auto 3rem;">Sin tecnicismos ni complicaciones. Te armamos todo, vos solo te enfocás en vender.</p>
+    <p class="section-sub" style="text-align:center;margin:0 auto 3rem;">Sin tecnicismos ni complicaciones. Personaliza la app a tu gusto y solo te enfocás en vender.</p>
     <div class="steps">
       <div class="step">
         <div class="step-title-wrapper">
@@ -1312,15 +1315,15 @@
           <div class="step-icon"><img src="apreton icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🤝-->
         </div>
         <h3>Nos contactás</h3>
-        <p>Hablamos por WhatsApp, entendemos tu negocio y te explicamos cómo funciona la plataforma sin compromiso.</p>
+        <p>Hablamos por WhatsApp, entendemos tu comercio y te explicamos cómo funciona la plataforma sin compromiso.</p>
       </div>
       <div class="step">
         <div class="step-title-wrapper">
           <div class="step-num">02</div>
           <div class="step-icon"><img src="colores icono.png" alt="App en celular con QR" style="width:10%;height:auto;display:block;"></div><!--🎨-->
         </div>
-        <h3>Personalizamos tu app</h3>
-        <p>Cargamos tu carta completa, tus precios, fotos y los colores de tu marca. Tu app queda lista en 24 horas.</p>
+        <h3>Personaliza tu app</h3>
+        <p>Cargá tu carta completa, tus precios, fotos, los colores de tu marca y tus redes. Tu tienda queda lista al instante.</p>
       </div>
       <div class="step">
         <div class="step-title-wrapper">
@@ -1357,29 +1360,46 @@
   <div class="section-inner">
     <div class="pricing-top">
       <span class="section-label">Planes mensuales</span>
-      <h2 class="section-title">Elegí el plan que mejor se adapta a tu negocio</h2>
+      <h2 class="section-title">Elegí el plan que mejor se adapta a tu comercio</h2>
       <p class="section-sub">Sin comisiones por pedido. Sin sorpresas. Cancelás cuando quieras.</p>
     </div>
     <div class="pricing-grid">
 
-      <!-- PLAN BÁSICO -->
+      <!-- PLAN ÚNICO -->
       <div class="plan-card">
-        <div class="plan-name">Plan Básico</div>
-        <div class="plan-price">$15.000<span>/mes</span></div>
+        <div class="plan-name">Plan Único</div>
+        <div class="plan-price">$20.000<span>/mes</span></div>
         <div class="plan-desc">Para negocios que solo necesitan que el sistema siga funcionando perfectamente.</div>
         <div class="plan-divider"></div>
-        <ul class="plan-features">
+        <ul class="plan-features"> <!-- revisar features según lo que de verdad tiene el sistema. -->
           <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Soporte técnico en horario comercial (respuesta en 24–48hs)</li>
           <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Corrección de errores básicos</li>
           <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Backup semanal de pedidos</li>
           <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> 1 actualización de carta por mes (precios o productos)</li>
         </ul>
         <div class="plan-cta">
-          <a href="#contacto" class="btn btn-outline">Elegir Básico</a>
+          <a href="registro.html?plan=mensual" class="btn btn-outline">Elegir</a>
         </div>
       </div>
 
-      <!-- PLAN PREMIUM -->
+      <!-- PLAN ANUAL -->
+      <div class="plan-card">
+        <div class="plan-name">Plan Anual</div>
+        <div class="plan-price">$160.000<span>/mes</span></div>
+        <div class="plan-desc">Para negocios que quieran el sistema por un año.</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features"> <!-- cambiar o dar a entender que es todo lo mismo que el único pero por 1 año entero. -->
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Soporte técnico en horario comercial (respuesta en 24–48hs)</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Corrección de errores básicos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> Backup semanal de pedidos</li>
+          <li><span class="chk"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span> 1 actualización de carta por mes (precios o productos)</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="registro.html?plan=anual" class="btn btn-outline">Elegir</a>
+        </div>
+      </div>
+
+      <!-- PLAN PREMIUM 
       <div class="plan-card">
         <div class="plan-name">Plan Premium</div>
         <div class="plan-price">$20.000<span>/mes</span></div>
@@ -1396,13 +1416,13 @@
         <div class="plan-cta">
           <a href="#contacto" class="btn btn-outline">Elegir Premium</a>
         </div>
-      </div>
+      </div>-->
 
-      <!-- PLAN FULL -->
+      <!-- PLAN FULL
       <div class="plan-card featured">
         <div class="plan-featured-badge">✅ Recomendado</div>
         <div class="plan-name">Plan Full</div>
-        <div class="plan-price">$35.000<span>/mes</span></div>
+        <div class="plan-price">$30.000<span>/mes</span></div>
         <div class="plan-desc">La opción ideal para negocios que quieren crecer y delegar todo lo digital.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
@@ -1418,10 +1438,10 @@
         <div class="plan-cta">
           <a href="#contacto" class="btn btn-primary">Elegir Full</a>
         </div>
-      </div>
+      </div> -->
 
     </div>
-    <p class="pricing-note">Todos los planes se abonan mensualmente. Sin permanencia mínima. ¿Dudas? <a href="#faq">Mirá las preguntas frecuentes</a> o <a href="#contacto">escribinos</a>.</p>
+    <!-- <p class="pricing-note">Todos los planes se abonan mensualmente. Sin permanencia mínima. ¿Dudas? <a href="#faq">Mirá las preguntas frecuentes</a> o <a href="#contacto">escribinos</a>.</p> -->
   </div>
 </section>
 
@@ -1437,10 +1457,10 @@
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Sirve para cualquier tipo de negocio gastronómico?
+          ¿Sirve para cualquier tipo de comercio?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
-        <div class="faq-a">Sí. WhatsOrder funciona para heladería, sushi, pizzería, rotisería, parrilla, hamburguesería, panadería y cualquier negocio que venda comida y reciba pedidos por WhatsApp. Adaptamos la carta y el sistema a tu rubro.</div>
+        <div class="faq-a">Sí. Whats Order funciona para heladerías, locales de comida rápida, locales de bebidas, fotocopiadoras, ferreterias, droguerias, tú stand de feria y cualquier comercio que venda y reciba pedidos por WhatsApp. Adaptamos la carta y el sistema a tu rubro.</div>
       </div>
 
       <div class="faq-item">
@@ -1456,7 +1476,7 @@
           ¿Cobran comisión por cada pedido?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
-        <div class="faq-a">No. Cero comisión por pedido. Solo pagás el costo de instalación una vez y luego el plan mensual que elijas. Cuanto más vendés, más te conviene.</div>
+        <div class="faq-a">No. Cero comisión por pedido. Solo pagás el plan mensual que elijas. Cuanto más vendés, más te conviene.</div>
       </div>
 
       <div class="faq-item">
@@ -1493,7 +1513,7 @@
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
-          ¿Funciona para negocios con más de una sucursal?
+          ¿Funciona para comercios con más de una sucursal?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
         <div class="faq-a">Sí, con el Plan Full gestionás múltiples sucursales desde un mismo sistema. Cada una tiene su propio panel y su propio WhatsApp de pedidos, con cartas y precios independientes.</div>
@@ -1507,7 +1527,7 @@
 <section id="contacto" style="background:var(--black);">
   <div class="section-inner" style="text-align:center;">
     <span class="section-label">Empezá hoy</span>
-    <h2 class="section-title" style="margin:0 auto 1rem;">¿Listo para digitalizar tu negocio?</h2>
+    <h2 class="section-title" style="margin:0 auto 1rem;">¿Listo para digitalizar tu comercio?</h2>
     <p class="section-sub" style="margin:0 auto 2.5rem;">Escribinos por WhatsApp y en minutos te contamos todo. Sin compromisos, sin tecnicismos.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
       <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20info%20sobre%20WhatsOrder" target="_blank" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">
@@ -1528,14 +1548,14 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="logo">
-          <img src="logo 3d wo. frente.png" alt="WhatsOrder" style="height:36px; margin: 0 0 25px 15px;" />
+          <img src="logo3d.png" alt="WhatsOrder" style="height:36px; margin: 0 0 25px 15px;" />
          <!-- <span class="logo-text">WHATS ORDER.</span>-->
         </div>
-        <p>Soluciones digitales para negocios gastronómicos que quieren crecer, organizarse y vender más con pedidos por WhatsApp.</p>
+        <p>Soluciones digitales para comercios/emprendimientos que quieren crecer, organizarse y vender más con pedidos por WhatsApp.</p>
         <div class="footer-social" style="margin-top:16px;">
-          <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram"><img src="logo instagram.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
-          <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp"><img src="logo whatsapp.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
-          <a href="mailto:hola@whatsorder.app" title="Email"><img src="logo gmail.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
+          <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram"><img src="logo-ignstagram.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
+          <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp"><img src="logo-wppsapp.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
+          <a href="mailto:hola@whatsorder.app" title="Email"><img src="logo-gmail.png" alt="App en celular con QR" style="width:100%;height:auto;display:block;"></a>
         </div>
       </div>
       <div class="footer-col">
@@ -1564,7 +1584,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 WhatsOrder. Todos los derechos reservados.</p>
+      <p>© 2025 Whats Order. Todos los derechos reservados.</p>
       <p style="color:var(--grey-4);font-size:0.75rem;">whatsorder.app · <a href="https://instagram.com/whatsorder.app" style="color:var(--grey-4);">@whatsorder.app</a></p>
     </div>
   </div>
