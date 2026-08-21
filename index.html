@@ -260,7 +260,7 @@
   }
   .lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
-  /* ───── SCROLL PANORAMA (NUEVA SECCIÓN BENEFICIOS) ───── */
+  /* ───── SCROLL PANORAMA (BENEFICIOS) ───── */
   .scroll-panorama {
     position: relative;
     height: 280vh;
@@ -301,23 +301,25 @@
     transition: transform 0.05s linear;
   }
 
+  /* PANEL PRINCIPAL: Ahora usa Flexbox y justify-content para estar siempre centrado */
   .sp-panel {
     flex-shrink: 0;
     width: 100vw;
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 470px 1fr;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0;
-    padding: 0 7vw 0 max(21vw, 60px);
+    gap: 4vw; /* Espacio dinámico entre texto y fotos */
+    padding: 0 5vw; /* Padding simétrico */
     position: relative;
+    box-sizing: border-box;
   }
   .sp-panel + .sp-panel {
     border-left: 1px solid var(--border);
   }
 
   .sp-text {
-    padding-right: 3rem;
+    flex: 0 1 480px; /* Tamaño máximo del texto, se achica si falta lugar */
     position: relative;
     z-index: 2;
   }
@@ -332,7 +334,7 @@
     font-size: 0.95rem;
     color: var(--grey-5);
     line-height: 1.7;
-    max-width: 340px;
+    max-width: 360px;
     margin-bottom: 1.6rem;
   }
   .sp-feat-list {
@@ -363,7 +365,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 40px;
+    flex-shrink: 0;
     overflow: visible;
   }
   .sp-img-card {
@@ -424,8 +426,8 @@
 
   .sp-progress {
     position: absolute;
-    bottom: 0px;
-    left: max(16vw, 60px);
+    bottom: 40px;
+    left: 5vw;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -452,7 +454,7 @@
   }
   .sp-scroll-hint {
     position: absolute;
-    bottom: 28px;
+    bottom: 40px;
     right: 5vw;
     font-size: 0.7rem;
     color: var(--grey-4);
@@ -483,14 +485,14 @@
     .scroll-panorama__sticky::after { display: none; }
     .scroll-panorama__track { flex-direction: column; transform: none !important; }
     .sp-panel {
-      grid-template-columns: 1fr;
+      flex-direction: column; /* Cambiado de grid a flex-column */
       width: 100%;
       min-height: auto;
       padding: 64px 5vw;
       gap: 2.5rem;
     }
     .sp-panel + .sp-panel { border-left: none; border-top: 1px solid var(--border); }
-    .sp-text { padding-right: 0; }
+    .sp-text { padding-right: 0; flex: 1 1 auto; max-width: 100%; }
     .sp-gallery { flex-wrap: wrap; justify-content: center; overflow: visible; padding: 0; }
     .sp-panel--a .sp-img-card:nth-child(1),
     .sp-panel--a .sp-img-card:nth-child(2),
@@ -807,11 +809,11 @@
           </ul>
         </div>
         <div class="sp-gallery">
-          <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
-            <img src="notebook-panel.png" alt="Panel de administración en notebook" />
+          <div class="sp-img-card" onclick="openLightbox('captura-estadistica-vistaescritorio.png')">
+            <img src="captura-estadistica-vistaescritorio.png" alt="Estadísticas en vista de escritorio" />
           </div>
-          <div class="sp-img-card" onclick="openLightbox('monitor-sin-fondo.png')">
-            <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor de escritorio" />
+          <div class="sp-img-card" onclick="openLightbox('captura-panel2.png')">
+            <img src="captura-panel2.png" alt="Panel de administración en monitor de escritorio" />
           </div>
         </div>
       </div>
@@ -830,8 +832,8 @@
           </ul>
         </div>
         <div class="sp-gallery">
-          <div class="sp-img-card" onclick="openLightbox('notebook-panel.png')">
-            <img src="notebook-panel.png" alt="Panel en notebook" />
+          <div class="sp-img-card" onclick="openLightbox('captura-tienda-vistanoteycelu.png')">
+            <img src="captura-tienda-vistanoteycelu.png" alt="Panel en notebook" />
           </div>
         </div>
       </div>
