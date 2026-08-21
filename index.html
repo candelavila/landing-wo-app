@@ -560,7 +560,8 @@
     position: relative; overflow: hidden;
     transition: transform .22s, border-color .22s;
   }
-  .plan-card:hover { transform: translateY(-4px); border-color: var(--violet-light); background: var(--violet-dim); }
+  .plan-card:hover,
+  .redes-sociales a:hover { transform: translateY(-4px); border-color: var(--violet-light); background: var(--violet-dim); }
   .plan-card.featured {
     border-color: var(--violet);
     background: linear-gradient(160deg, rgba(124,58,237,0.12), var(--black) 60%);
@@ -625,6 +626,11 @@
   .faq-item {
     background: var(--black); border: 1px solid var(--border);
     border-radius: 14px; overflow: hidden;
+    transition: transform .22s, border-color .22s;
+  }
+  .faq-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--violet-light);
   }
   .faq-q {
     display: flex; align-items: center; justify-content: space-between;
@@ -676,15 +682,14 @@
     flex-wrap: wrap; gap: 12px;
   }
   .footer-bottom p { font-size: 0.8rem; color: var(--grey-4); }
-  /*.footer-social { display: flex; gap: 12px; }*/
   /*.footer-social*/ 
   .redes-sociales a {
     width: 115px; height: 115px; border-radius: 8px;
     /*background: var(--grey-1);*/ border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 1rem; transition: all .2s;
+    transition: transform .22s, border-color .22s;
   }
-  .redes-sociales a:hover { border-color: var(--violet-light); background: var(--violet-dim); }
 
   /* ───── FLOATING WA ───── */
   .wa-float {
@@ -781,7 +786,7 @@
       <!-- <span class="logo-text">WHATS ORDER.</span> -->
     </a>
     <div class="header-right">
-      <a href="#contacto" class="btn btn-primary">Empezá hoy</a>
+      <a href="login.php" class="btn btn-primary">Acceder</a>
       <div class="hamburger" id="hamburger" onclick="toggleNav()">
         <span></span><span></span><span></span>
       </div>
@@ -1401,7 +1406,7 @@
       <!-- PLAN ANUAL -->
       <div class="plan-card">
         <div class="plan-name">Plan Anual</div>
-        <div class="plan-price">$250.000<span>/año</span></div>
+        <div class="plan-price">$275.000<span>/año</span></div>
         <div class="plan-desc">Para negocios que quieran el sistema por un año.</div>
         <div class="plan-divider"></div>
         <ul class="plan-features"> <!-- cambiar o dar a entender que es todo lo mismo que el único pero por 1 año entero. -->
