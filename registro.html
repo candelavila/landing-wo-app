@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Suscripción – WhatsOrder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #060608;
+    --white: #f5f5f5;
+    --violet: #7c3aed;
+    --violet-light: #a855f7;
+    --violet-dim: rgba(124,58,237,0.18);
+    --grey-1: #1a1a1f;
+    --grey-2: #2a2a30;
+    --grey-3: #444450;
+    --grey-4: #888896;
+    --grey-5: #b0b0bc;
+    --border: rgba(255,255,255,0.08);
+    --error: #ef4444; /* Color rojo para errores */
+    --error-dim: rgba(239, 68, 68, 0.15);
+  }
+
+  @font-face {
+    font-family: 'MiFuentePersonalizada';
+    src: url('fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2 { font-family: 'MiFuentePersonalizada', sans-serif; }
+  h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.15; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ───── HEADER ───── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 5vw;
+    height: 88px;
+    background: transparent;
+  }
+  .header-wrapper {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 3vw;
+    width: 100%; max-width: 1200px; margin: 1vw auto 0;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 78%) 25%, transparent 165%);
+    box-shadow: inset 0 0 0 2px rgb(44 37 71 / 25%);
+    border-radius: 40px;
+    gap: 70px;
+  }
+  .logo { display: flex; justify-content: start; grid-column: 2; position: relative; }
+  .logo img { height: 70px; width: auto; filter: brightness(1.1); transform: scale(3.5); }
+  nav { display: flex; align-items: center; gap: 15px; grid-column: 1; justify-content: flex-start; }
+  nav a { font-size: 0.895rem; color: rgb(0 0 0 / 70%); transition: color .2s; font-weight: bold; }
+  nav a:hover { color: #ffffff; }
+  
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: 0.875rem; letter-spacing: 0.02em;
+    cursor: pointer; transition: all .22s; border: none;
+  }
+  .btn-primary { background: var(--violet); color: #fff; }
+  .btn-primary:hover { background: var(--violet-light); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--white); border: 1.5px solid var(--grey-3); }
+  .btn-outline:hover { border-color: var(--violet-light); color: var(--violet-light); }
+  
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all .3s; }
+  .header-right { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+
+  /* ───── MAIN CONTENT / FORM CONTAINER ───── */
+  main {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 150px 5vw 80px; position: relative;
+  }
+
+  .form-container {
+    width: 100%; max-width: 620px; background: var(--grey-1);
+    border: 1px solid var(--border); border-radius: 20px; padding: 40px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5); position: relative; overflow: hidden;
+  }
+  .form-container::before {
+    content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%); pointer-events: none;
+  }
+  .form-header-title { text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: 30px; }
+
+  /* Stepper */
+  .stepper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; position: relative; z-index: 1; }
+  .stepper::before { content: ''; position: absolute; top: 20px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: -1; }
+  .step-item { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--grey-1); padding: 0 10px; }
+  .step-circle {
+    width: 42px; height: 42px; border-radius: 50%; background: var(--grey-2);
+    border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--grey-5); transition: all 0.3s ease;
+  }
+  .step-label { font-size: 0.75rem; font-family: 'Poppins', sans-serif; color: var(--grey-5); font-weight: 500; transition: color 0.3s ease; }
+  .step-item.active .step-circle { background: var(--violet-dim); border-color: var(--violet-light); color: var(--violet-light); box-shadow: 0 0 15px rgba(124,58,237,0.3); }
+  .step-item.active .step-label { color: var(--white); font-weight: 700; }
+  .step-item.completed .step-circle { background: var(--violet); border-color: var(--violet); color: var(--white); }
+
+  /* Paneles */
+  .step-panel { display: none; animation: fadeUp .4s ease both; }
+  .step-panel.active { display: block; }
+
+  /* Inputs */
+  .input-group { margin-bottom: 20px; position: relative; }
+  .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  label { display: block; font-size: 0.85rem; font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--grey-4); margin-bottom: 8px; }
+  input, select {
+    width: 100%; background: var(--grey-2); border: 1px solid var(--grey-3);
+    border-radius: 10px; padding: 14px 16px; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; transition: all 0.2s; outline: none;
+  }
+  input:focus, select:focus { border-color: var(--violet-light); box-shadow: 0 0 0 3px var(--violet-dim); }
+  input::placeholder { color: var(--grey-4); }
+  
+  .input-prefix-wrapper { display: flex; background: var(--grey-2); border: 1px solid var(--grey-3); border-radius: 10px; overflow: hidden; transition: all 0.2s; }
+  .input-prefix-wrapper:focus-within { border-color: var(--violet-light); box-shadow: 0 0 0 3px var(--violet-dim); }
+  .input-prefix { background: var(--black); padding: 14px 16px; color: var(--grey-5); font-size: 0.95rem; border-right: 1px solid var(--grey-3); user-select: none; }
+  .input-prefix-wrapper input { border: none; border-radius: 0; background: transparent; }
+  .input-prefix-wrapper input:focus { box-shadow: none; }
+  .input-hint { font-size: 0.75rem; color: var(--grey-5); margin-top: 6px; display: block; }
+
+  /* ───── CLASES DE VALIDACIÓN (NUEVO) ───── */
+  .input-error {
+    border-color: var(--error) !important;
+    box-shadow: 0 0 0 3px var(--error-dim) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+  .error-message {
+    color: var(--error);
+    font-size: 0.75rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    margin-top: 6px;
+    display: none; /* Oculto por defecto */
+  }
+  .error-message.active {
+    display: block; /* Se muestra cuando hay error */
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+  }
+
+  /* Paso 4: Resumen */
+  .summary-card { background: linear-gradient(160deg, rgba(124,58,237,0.12), var(--black) 80%); border: 1px solid var(--violet); border-radius: 16px; padding: 24px; text-align: center; margin-bottom: 24px; }
+  .summary-label { font-size: 0.8rem; color: var(--grey-4); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'Poppins', sans-serif; font-weight: 700; }
+  .summary-title { font-size: 1.5rem; font-weight: 800; color: var(--violet-light); margin: 8px 0; font-family: 'Poppins', sans-serif; }
+  .summary-price { font-size: 1rem; color: var(--white); }
+  .trust-message { background: var(--grey-2); border: 1px solid var(--border); border-radius: 12px; padding: 18px; font-size: 0.9rem; color: var(--grey-5); text-align: center; line-height: 1.6; margin-bottom: 30px; }
+  .trust-message strong { color: var(--white); }
+
+  .form-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+  /* ───── FOOTER ───── */
+  footer { background: var(--black); padding: 60px 5vw 36px; color: var(--white); border-top: 1px solid var(--border); }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand p { font-size: 0.875rem; color: var(--grey-4); margin-top: 10px; line-height: 1.6; max-width: 280px; }
+  .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-4); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a { font-size: 0.875rem; color: var(--grey-5); transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--violet-light); }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 0.8rem; color: var(--grey-4); }
+  .footer-social { display: flex; gap: 12px; }
+  .footer-social a { width: 36px; height: 36px; border-radius: 8px; background: var(--grey-1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .footer-social a:hover { border-color: var(--violet-light); background: var(--violet-dim); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 767px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+    .header-right .btn { display: none; }
+    .form-container { padding: 30px 20px; border-radius: 16px; }
+    .input-row { grid-template-columns: 1fr; gap: 0; }
+    .step-label { display: none; }
+    .stepper::before { top: 21px; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: .4;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-wrapper">
+    <nav id="main-nav">
+      <a href="index4.html#beneficios">Beneficios</a>
+      <a href="index4.html#como-funciona">Cómo funciona</a>
+      <a href="index4.html#planes">Planes</a>
+      <a href="index4.html#faq">Consultas</a>
+    </nav>
+    <a href="index4.html" class="logo">
+      <img src="logo gif.gif" alt="WhatsOrder logo" />
+    </a>
+    <div class="header-right">
+      <a href="index4.html#contacto" class="btn btn-primary">Empezá hoy</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="form-container">
+    <h1 class="form-header-title">Suscripción</h1>
+
+    <div class="stepper">
+      <div class="step-item active" id="indicator-1"><div class="step-circle">1</div><div class="step-label">Datos</div></div>
+      <div class="step-item" id="indicator-2"><div class="step-circle">2</div><div class="step-label">Tienda</div></div>
+      <div class="step-item" id="indicator-3"><div class="step-circle">3</div><div class="step-label">Cuenta</div></div>
+      <div class="step-item" id="indicator-4"><div class="step-circle">4</div><div class="step-label">Resumen</div></div>
+    </div>
+
+    <form id="registroForm" onsubmit="event.preventDefault();">
+      
+      <div class="step-panel active" id="step-1">
+        <div class="input-row">
+          <div class="input-group">
+            <label>Nombre</label>
+            <input type="text" id="reg-nombre" placeholder="Tu nombre">
+            <span class="error-message" id="err-reg-nombre">Complete el campo Nombre (más de 3 letras).</span>
+          </div>
+          <div class="input-group">
+            <label>Apellido</label>
+            <input type="text" id="reg-apellido" placeholder="Tu apellido">
+            <span class="error-message" id="err-reg-apellido">Complete el campo Apellido (más de 3 letras).</span>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="reg-email" placeholder="ejemplo@correo.com">
+          <span class="error-message" id="err-reg-email">Complete el campo Email con un formato válido.</span>
+        </div>
+        <div class="input-group">
+          <label>Celular del titular de la cuenta</label>
+          <div class="input-prefix-wrapper" id="wrap-reg-celular1">
+            <span class="input-prefix">AR +54</span>
+            <input type="tel" id="reg-celular1" placeholder="11 1234 5678">
+          </div>
+          <span class="error-message" id="err-reg-celular1">Ingrese un número de celular válido (10 dígitos, sin 0 ni 15).</span>
+        </div>
+      </div>
+
+      <div class="step-panel" id="step-2">
+        <div class="input-group">
+          <label>Nombre de la tienda</label>
+          <input type="text" id="reg-tienda" placeholder="Ej: Pizzería Roma">
+          <span class="error-message" id="err-reg-tienda">Complete el campo Nombre de la tienda.</span>
+        </div>
+        <div class="input-group">
+          <label>URL (Link de tu tienda)</label>
+          <div class="input-prefix-wrapper" id="wrap-reg-url">
+            <span class="input-prefix">whatsorder.app/</span>
+            <input type="text" id="reg-url" placeholder="mi-negocio">
+          </div>
+          <span class="input-hint">El link que compartirás con tus clientes.</span>
+          <span class="error-message" id="err-reg-url">Complete la URL (solo letras, números y guiones).</span>
+        </div>
+        <div class="input-group">
+          <label>Seleccioná el rubro de tu negocio</label>
+          <select id="reg-rubro">
+            <option value="" disabled selected>Elegir rubro...</option>
+            <option value="gastronomia">Gastronomía / Comida rápida</option>
+            <option value="heladeria">Heladería / Cafetería</option>
+            <option value="bebidas">Local de Bebidas</option>
+            <option value="retail">Ferretería / Corralón / Pet Shop</option>
+            <option value="otros">Otros rubros</option>
+          </select>
+          <span class="error-message" id="err-reg-rubro">Seleccione un rubro de la lista.</span>
+        </div>
+        <div class="input-group">
+          <label>Celular WhatsApp (Donde llegarán los pedidos)</label>
+          <div class="input-prefix-wrapper" id="wrap-reg-celular2">
+            <span class="input-prefix">AR +54</span>
+            <input type="tel" id="reg-celular2" placeholder="11 1234 5678">
+          </div>
+          <span class="input-hint">Número al que se comunican tus clientes.</span>
+          <span class="error-message" id="err-reg-celular2">Ingrese un número de WhatsApp válido (10 dígitos).</span>
+        </div>
+      </div>
+
+      <div class="step-panel" id="step-3">
+        <div class="input-group">
+          <label>Usuario (Para ingresar al panel)</label>
+          <input type="text" id="reg-usuario" placeholder="Ej: admin-roma">
+          <span class="error-message" id="err-reg-usuario">Complete un nombre de usuario (mínimo 4 caracteres).</span>
+        </div>
+        <div class="input-group">
+          <label>Contraseña</label>
+          <input type="password" id="reg-pass" placeholder="Mínimo 8 caracteres">
+          <span class="error-message" id="err-reg-pass">La contraseña debe tener al menos 8 caracteres.</span>
+        </div>
+      </div>
+
+      <div class="step-panel" id="step-4">
+        <div class="summary-card">
+          <div class="summary-label">Plan Elegido</div>
+          <div class="summary-title" id="resumen-titulo">Plan Único Mensual</div>
+          <div class="summary-price" id="resumen-precio">$20.000 ARS / mes</div>
+        </div>
+        <div class="trust-message">
+          ¡Excelente elección! Disfrutá tus <strong>7 días de prueba totalmente gratis</strong> para configurar tu menú o catálogo. <br><br>
+          No te cobraremos nada hoy. Unos días antes de finalizar tu prueba, te enviaremos por WhatsApp los datos para abonar por transferencia si decidís continuar.
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" id="btn-back" onclick="handleBack()">Volver</button>
+        <button type="button" class="btn btn-primary" id="btn-next" onclick="nextStep()" style="margin-left: auto;">Siguiente</button>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo 3d wo. frente.png" alt="WhatsOrder" style="height:36px; margin: 0 0 25px 15px;" />
+        </div>
+        <p>Soluciones digitales para comercios/emprendimientos que quieren crecer, organizarse y vender más con pedidos por WhatsApp.</p>
+        <div class="footer-social" style="margin-top:16px;">
+          <a href="https://instagram.com/whatsorder.app" target="_blank" title="Instagram"><img src="logo-ig.png" alt="Instagram" style="width:100%;height:auto;display:block;"></a>
+          <a href="https://wa.me/5491100000000" target="_blank" title="WhatsApp"><img src="logo-wpp.png" alt="WhatsApp" style="width:100%;height:auto;display:block;"></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="index4.html#como-funciona">Cómo funciona</a></li>
+          <li><a href="index4.html#planes">Planes y precios</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Whats Order. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const planElegido = urlParams.get('plan');
+    const tituloEl = document.getElementById('resumen-titulo');
+    const precioEl = document.getElementById('resumen-precio');
+
+    if (planElegido === 'anual') {
+      tituloEl.textContent = 'Plan Único - Anual';
+      precioEl.textContent = '$160.000 ARS / año';
+    } else {
+      tituloEl.textContent = 'Plan Único - Mensual';
+      precioEl.textContent = '$20.000 ARS / mes';
+    }
+  });
+
+  // ───── SISTEMA DE VALIDACIONES ─────
+  function validateStep(step) {
+    let isValid = true;
+    
+    // Función auxiliar para mostrar errores
+    function showError(inputId, isWrapper = false) {
+      const inputEl = document.getElementById(inputId);
+      const errorMsg = document.getElementById(`err-${inputId}`);
+      
+      if(isWrapper) {
+        document.getElementById(`wrap-${inputId}`).classList.add('input-error');
+      } else {
+        inputEl.classList.add('input-error');
+      }
+      
+      errorMsg.classList.add('active');
+      isValid = false;
+    }
+
+    // Limpiar errores previos en el paso actual
+    const stepPanel = document.getElementById(`step-${step}`);
+    stepPanel.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    stepPanel.querySelectorAll('.error-message.active').forEach(el => el.classList.remove('active'));
+
+    if (step === 1) {
+      // Validar Nombre: >3 letras, no solo números
+      const nom = document.getElementById('reg-nombre').value.trim();
+      const soloLetrasNom = nom.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '');
+      if (nom.length < 4 || /^\d+$/.test(nom) || soloLetrasNom.length < 4) showError('reg-nombre');
+
+      // Validar Apellido
+      const ape = document.getElementById('reg-apellido').value.trim();
+      const soloLetrasApe = ape.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '');
+      if (ape.length < 4 || /^\d+$/.test(ape) || soloLetrasApe.length < 4) showError('reg-apellido');
+
+      // Validar Email con RegEx
+      const email = document.getElementById('reg-email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) showError('reg-email');
+
+      // Validar Celular (Argentina): Sacar espacios/guiones, deben quedar exactamente 10 dígitos
+      const cel1 = document.getElementById('reg-celular1').value.replace(/\D/g, '');
+      if (cel1.length !== 10) showError('reg-celular1', true);
+    } 
+    else if (step === 2) {
+      // Validar Tienda
+      const tienda = document.getElementById('reg-tienda').value.trim();
+      if (tienda.length < 2) showError('reg-tienda');
+
+      // Validar URL: Sin espacios, ni caracteres raros
+      const url = document.getElementById('reg-url').value.trim();
+      const urlRegex = /^[a-z0-9-]+$/i;
+      if (url.length < 3 || !urlRegex.test(url)) showError('reg-url', true);
+
+      // Validar Select Rubro
+      const rubro = document.getElementById('reg-rubro').value;
+      if (!rubro) showError('reg-rubro');
+
+      // Validar Celular Tienda
+      const cel2 = document.getElementById('reg-celular2').value.replace(/\D/g, '');
+      if (cel2.length !== 10) showError('reg-celular2', true);
+    } 
+    else if (step === 3) {
+      // Validar Usuario
+      const user = document.getElementById('reg-usuario').value.trim();
+      if (user.length < 4) showError('reg-usuario');
+
+      // Validar Contraseña (mínimo 8)
+      const pass = document.getElementById('reg-pass').value;
+      if (pass.length < 8) showError('reg-pass');
+    }
+
+    return isValid;
+  }
+
+  function updateUI() {
+    document.querySelectorAll('.step-panel').forEach((panel, index) => {
+      panel.classList.toggle('active', index + 1 === currentStep);
+    });
+
+    document.querySelectorAll('.step-item').forEach((item, index) => {
+      const stepNum = index + 1;
+      item.classList.remove('active', 'completed');
+      if (stepNum === currentStep) item.classList.add('active');
+      else if (stepNum < currentStep) item.classList.add('completed');
+    });
+
+    const btnBack = document.getElementById('btn-back');
+    const btnNext = document.getElementById('btn-next');
+
+    if (currentStep === 1) {
+      btnBack.textContent = '← Volver a la landing';
+      btnNext.textContent = 'Siguiente';
+    } else if (currentStep === totalSteps) {
+      btnBack.textContent = '← Volver';
+      btnNext.textContent = 'Comenzar prueba gratis';
+    } else {
+      btnBack.textContent = '← Volver';
+      btnNext.textContent = 'Siguiente';
+    }
+  }
+
+  function handleBack() {
+    if (currentStep === 1) {
+      window.location.href = 'index4.html';
+    } else {
+      currentStep--;
+      updateUI();
+    }
+  }
+
+  function nextStep() {
+    // Si NO estamos en el último paso, validamos antes de avanzar
+    if (currentStep < totalSteps) {
+      if (validateStep(currentStep)) {
+        currentStep++;
+        updateUI();
+      }
+    } else {
+      // Si estamos en el último paso (Resumen), acá envías el formulario al backend
+      alert('¡Formulario enviado con éxito! Preparando tu entorno...');
+      // form.submit(); o fetch() 
+    }
+  }
+</script>
+</body>
+</html>
