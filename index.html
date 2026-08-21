@@ -903,7 +903,7 @@
       </div>
     </div>
 
-    <div class="hero-img-wrap anim-fadeup delay-2">
+    <!-- <div class="hero-img-wrap anim-fadeup delay-2">
       <div class="hero-slides-deck">
         <div class="hero-slide-card">
           <img src="monitor-sin-fondo.png" alt="WhatsOrder en monitor" />
@@ -919,7 +919,7 @@
         </div>
       </div>
 
-      <!-- Hero carousel: visible solo en ≤1219px -->
+      // Hero carousel: visible solo en ≤1219px 
       <div class="hero-carousel-viewport" id="heroCarouselVp">
         <div class="hero-carousel-track" id="heroCarouselTrack">
           <div class="hero-carousel-slide">
@@ -942,7 +942,7 @@
         <button class="hero-carousel-btn" onclick="heroCarouselNext()" aria-label="Siguiente">&#8250;</button>
       </div>
 
-    </div>
+    </div>  -->
   </div>
 </section>
 
@@ -1487,36 +1487,36 @@
     <!-- Features incluidas siempre (software) -->
     <div style="max-width:860px;margin:0 auto 3rem;">
       <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--violet-light);margin-bottom:1.2rem;font-family:'Poppins',sans-serif;">El software — incluido siempre</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
-        <div style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
+      <div id="grid-funcionalidades" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
+        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
           <span style="font-size:1.3rem;flex-shrink:0;">🗂️</span>
           <div>
             <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Panel de administración completo</p>
             <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Productos, categorías, grupos de opciones, métodos de pago, promociones y horarios. Cambios ilimitados, cuando quieras.</p>
           </div>
         </div>
-        <div style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
+        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
           <span style="font-size:1.3rem;flex-shrink:0;">📋</span>
           <div>
             <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Gestión de pedidos con trazabilidad</p>
             <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Estados, historial y registro de quién cambió qué y cuándo. Todo controlado.</p>
           </div>
         </div>
-        <div style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
+        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
           <span style="font-size:1.3rem;flex-shrink:0;">📊</span>
           <div>
             <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Estadísticas del negocio</p>
             <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Productos más vendidos y horarios más concurridos por el rango de fechas que elijas. Exportables en imagen o Excel.</p>
           </div>
         </div>
-        <div style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
+        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
           <span style="font-size:1.3rem;flex-shrink:0;">📱</span>
           <div>
             <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Catálogo público mobile-first</p>
             <p style="font-size:0.82rem;color:var(--grey-5);line-height:1.5;">Carta para tus clientes con carrito y pedido directo por WhatsApp. Sin apps, sin cuentas.</p>
           </div>
         </div>
-        <div style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
+        <div class="grid-item-funcionalidad" style="background:var(--grey-1);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;">
           <span style="font-size:1.3rem;flex-shrink:0;">🎨</span>
           <div>
             <p style="font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;color:var(--white);margin-bottom:4px;">Personalización de marca</p>
@@ -1600,14 +1600,14 @@
         </div>
         <div class="faq-a">No. Cero comisión por pedido. Solo pagás el plan mensual que elijas. Cuanto más vendés, más te conviene.</div>
       </div>
-
+      <!-- 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           ¿Puedo cambiar mi carta o precios cuando quiero?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
         <div class="faq-a">Con el Plan Básico tenés 1 cambio por mes. Con Premium y Full los cambios son ilimitados. En todos los casos respondemos rápido para que tu carta siempre esté actualizada.</div>
-      </div>
+      </div> -->
 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -1632,14 +1632,14 @@
         </div>
         <div class="faq-a">Todos los pedidos y datos son tuyos. Antes de cancelar podés descargar tu historial completo en Excel. Tus datos nunca se comparten con terceros.</div>
       </div>
-
+      <!-- 
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           ¿Funciona para comercios con más de una sucursal?
           <span class="arrow"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></span>
         </div>
         <div class="faq-a">Sí, con el Plan Full gestionás múltiples sucursales desde un mismo sistema. Cada una tiene su propio panel y su propio WhatsApp de pedidos, con cartas y precios independientes.</div>
-      </div>
+      </div>-->
 
     </div>
   </div>
